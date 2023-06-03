@@ -1,0 +1,25 @@
+{
+    "name": "Afaqy/tripworkflow",
+    "description": "",
+    "authors": [
+        {
+            "name": "Afaqy Company",
+            "email": "info@afaqy.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Afaqy\\TripWorkflow\\Providers\\TripWorkflowServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Afaqy\\TripWorkflow\\": ""
+        }
+    }
+}

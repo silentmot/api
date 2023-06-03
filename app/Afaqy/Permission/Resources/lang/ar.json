@@ -1,0 +1,13 @@
+{
+    "waste type" : "نوع النفاية",
+    "entity name" : "اسم الجهة",
+    "representative_name" : "اسم المفوض",
+    "national id" : "رقم الهويه",
+    "allowed weight" : "الوزن",
+    "units": "المركبات",
+    "plate number" : " المركبة",
+    "rfid" : "rfid",
+    "qr_code" : "QR Code",
+    "demolition serial": "مسلسل الدمار",
+    "permission number": "رقم الرخصة"
+}

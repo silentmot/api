@@ -1,0 +1,25 @@
+{
+    "name": "Afaqy/wastetype",
+    "description": "",
+    "authors": [
+        {
+            "name": "Afaqy Company",
+            "email": "info@afaqy.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Afaqy\\WasteType\\Providers\\WasteTypeServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Afaqy\\WasteType\\": ""
+        }
+    }
+}

@@ -1,0 +1,26 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use League\Fractal\TransformerAbstract;
+
+class $CLASS$ extends TransformerAbstract
+{
+    /**
+     * @var array
+     */
+    protected $availableIncludes = [
+        //
+    ];
+
+    /**
+     * @param  mixed $data
+     * @return array
+     */
+    public function transform($data): array
+    {
+        return [
+            //
+        ];
+    }
+}

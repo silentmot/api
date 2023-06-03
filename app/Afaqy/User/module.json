@@ -1,0 +1,13 @@
+{
+    "name": "User",
+    "alias": "user",
+    "description": "To manage system users.",
+    "keywords": ["users", "auth", "authentication", "login", "registration"],
+    "order": 1,
+    "providers": [
+        "Afaqy\\User\\Providers\\UserServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

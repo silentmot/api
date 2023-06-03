@@ -1,0 +1,25 @@
+{
+    "name": "Afaqy/inspector",
+    "description": "",
+    "authors": [
+        {
+            "name": "Afaqy Company",
+            "email": "info@afaqy.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Afaqy\\Inspector\\Providers\\InspectorServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Afaqy\\Inspector\\": ""
+        }
+    }
+}

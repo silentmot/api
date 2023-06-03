@@ -1,0 +1,25 @@
+{
+    "name": "Afaqy/gate",
+    "description": "",
+    "authors": [
+        {
+            "name": "Afaqy Company",
+            "email": "info@afaqy.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Afaqy\\Gate\\Providers\\GateServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Afaqy\\Gate\\": ""
+        }
+    }
+}

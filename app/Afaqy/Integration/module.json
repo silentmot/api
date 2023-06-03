@@ -1,0 +1,13 @@
+{
+    "name": "Integration",
+    "alias": "integration",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\Integration\\Providers\\IntegrationServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

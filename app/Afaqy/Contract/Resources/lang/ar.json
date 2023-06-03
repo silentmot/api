@@ -1,0 +1,13 @@
+{
+    "start at": "بداية العقد",
+    "end at": "نهاية العقد",
+    "contact name": "إسم المسئول",
+    "contact title": "صفة المسئول",
+    "contact email": "بريد المسئول الإلكتروني",
+    "contact phone": "هاتف المسئول",
+    "district id": "المنطقة",
+    "neighborhood id": "الحي",
+    "unit id": "المركبة",
+    "station id": "المحطة",
+    "units ids": "المركبات"
+}

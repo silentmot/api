@@ -1,0 +1,13 @@
+{
+    "name": "Contact",
+    "alias": "contact",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\Contact\\Providers\\ContactServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

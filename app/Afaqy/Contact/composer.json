@@ -1,0 +1,25 @@
+{
+    "name": "Afaqy/contact",
+    "description": "",
+    "authors": [
+        {
+            "name": "Afaqy Company",
+            "email": "info@afaqy.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Afaqy\\Contact\\Providers\\ContactServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Afaqy\\Contact\\": ""
+        }
+    }
+}

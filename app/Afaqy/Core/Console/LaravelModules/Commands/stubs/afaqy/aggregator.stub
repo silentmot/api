@@ -1,0 +1,16 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Afaqy\Core\Actions\Aggregator;
+
+class $CLASS$ extends Aggregator
+{
+    /**
+     * @return mixed
+     */
+    public function execute()
+    {
+        # code...
+    }
+}

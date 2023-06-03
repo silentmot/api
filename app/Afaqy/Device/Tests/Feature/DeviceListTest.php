@@ -1,0 +1,88 @@
+<?php
+
+namespace Afaqy\Device\Tests\Feature;
+
+use Tests\TestCase;
+
+class DeviceListTest extends TestCase
+{
+    /** @test */
+    public function it_prevents_unauthenticated_user_from_list_devices()
+    {
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+        );
+    }
+
+    /** @test */
+    public function it_shows_devices_list_paginated_by_default()
+    {
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+        );
+    }
+
+    /** @test */
+    public function it_filters_devices_by_name()
+    {
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+        );
+    }
+
+    /** @test */
+    public function it_filters_devices_by_type()
+    {
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+        );
+    }
+
+    /** @test */
+    public function it_returns_validation_error_when_pass_invalid_sort_columns()
+    {
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+        );
+    }
+
+    /** @test */
+    public function it_sorts_with_the_given_column_when_pass_sort_parameter()
+    {
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+        );
+    }
+
+    /** @test */
+    public function it_returns_validation_error_when_pass_invalid_direction_value()
+    {
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+        );
+    }
+
+    /** @test */
+    public function it_sorts_with_the_given_direction_when_pass_direction_parameter()
+    {
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+        );
+    }
+
+    /** @test */
+    public function it_returns_validation_error_when_pass_per_page_less_than_50_items()
+    {
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+        );
+    }
+
+    /** @test */
+    public function it_limits_records_by_the_given_per_page_parameter()
+    {
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.'
+        );
+    }
+}

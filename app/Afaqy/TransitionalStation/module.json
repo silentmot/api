@@ -1,0 +1,13 @@
+{
+    "name": "TransitionalStation",
+    "alias": "transitionalstation",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\TransitionalStation\\Providers\\TransitionalStationServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,13 @@
+{
+    "name": "Contractor",
+    "alias": "contractor",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\Contractor\\Providers\\ContractorServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

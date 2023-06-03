@@ -1,0 +1,13 @@
+{
+    "name": "UnitType",
+    "alias": "unittype",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\UnitType\\Providers\\UnitTypeServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

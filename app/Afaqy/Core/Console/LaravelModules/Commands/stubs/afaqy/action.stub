@@ -1,0 +1,16 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Afaqy\Core\Actions\Action;
+
+class $CLASS$ extends Action
+{
+    /**
+     * @return mixed
+     */
+    public function execute()
+    {
+        # code...
+    }
+}

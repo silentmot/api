@@ -1,0 +1,41 @@
+{
+    "name": "deoliveiralucas/array-keys-case-transform",
+    "description": "Simple library to handle words case transformation from array keys",
+    "license": "MIT",
+    "keywords": ["array", "keys", "case", "transform", "camelcase", "snakecase"],
+    "authors": [
+        {
+            "name": "Lucas de Oliveira",
+            "email": "contato@deoliveiralucas.net"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "icanboogie/inflector": "^1.4 || ^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7",
+        "zendframework/zend-coding-standard": "^1.0",
+        "squizlabs/php_codesniffer": "*",
+        "roave/security-advisories": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "ArrayKeysCaseTransform\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ArrayKeysCaseTransformTest\\": "test"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always"
+    }
+}

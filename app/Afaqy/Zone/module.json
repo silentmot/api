@@ -1,0 +1,13 @@
+{
+    "name": "Zone",
+    "alias": "zone",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\Zone\\Providers\\ZoneServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

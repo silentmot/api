@@ -1,0 +1,13 @@
+{
+    "name": "Unit",
+    "alias": "unit",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\Unit\\Providers\\UnitServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,13 @@
+{
+    "name": "Device",
+    "alias": "device",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\Device\\Providers\\DeviceServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

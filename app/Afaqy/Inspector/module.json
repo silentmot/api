@@ -1,0 +1,13 @@
+{
+    "name": "Inspector",
+    "alias": "inspector",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\Inspector\\Providers\\InspectorServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

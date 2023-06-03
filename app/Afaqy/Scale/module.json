@@ -1,0 +1,13 @@
+{
+    "name": "Scale",
+    "alias": "scale",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\Scale\\Providers\\ScaleServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

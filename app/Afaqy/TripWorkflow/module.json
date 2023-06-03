@@ -1,0 +1,13 @@
+{
+    "name": "TripWorkflow",
+    "alias": "tripworkflow",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\TripWorkflow\\Providers\\TripWorkflowServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

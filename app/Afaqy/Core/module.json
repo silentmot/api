@@ -1,0 +1,14 @@
+{
+    "name": "Core",
+    "alias": "core",
+    "description": "The core module for Afaqy back-end team. This is required for every install.",
+    "keywords": ["core"],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Afaqy\\Core\\Providers\\CoreServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

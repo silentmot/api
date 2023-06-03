@@ -1,0 +1,25 @@
+{
+    "name": "Afaqy/transitionalstation",
+    "description": "",
+    "authors": [
+        {
+            "name": "Afaqy Company",
+            "email": "info@afaqy.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Afaqy\\TransitionalStation\\Providers\\TransitionalStationServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Afaqy\\TransitionalStation\\": ""
+        }
+    }
+}

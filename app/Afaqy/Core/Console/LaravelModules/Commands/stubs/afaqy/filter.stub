@@ -1,0 +1,10 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Afaqy\Core\Models\Filters\ModelFilter;
+
+class $CLASS$ extends ModelFilter
+{
+    //
+}

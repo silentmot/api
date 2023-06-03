@@ -1,0 +1,129 @@
+image: registry.gitlab.com/afaqyit/mardam-backend:latest
+
+stages:
+  - test
+  - deploy
+  - notify
+
+
+cache:
+  paths:
+    - vendor/
+
+
+code_quality:
+  image: docker:stable
+  stage: test
+  except:
+    - develop
+    - test
+    - stage
+    - uat
+    - master
+  variables:
+    DOCKER_DRIVER: overlay2
+  allow_failure: true
+  services:
+    - docker:stable-dind
+  script:
+    - export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
+    - docker run
+        --env SOURCE_CODE="$PWD"
+        --volume "$PWD":/code
+        --volume /var/run/docker.sock:/var/run/docker.sock
+        "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
+  artifacts:
+    reports:
+      codequality: gl-code-quality-report.json
+
+
+unit_tests:
+  stage: test
+  except:
+    - develop
+    - test
+    - stage
+    - uat
+    - master
+  script:
+    # Create new DB user for the application connection.
+    - service mysql start
+    - mysql --user="root" --password="12345" --execute="CREATE DATABASE $TEST_DB_NAME"
+    - mysql --user="root" --password="12345" --execute="CREATE USER '$TEST_DB_USERNAME'@'localhost' IDENTIFIED BY '$TEST_DB_PASSWORD'" 2>/dev/null
+    - mysql --user="root" --password="12345" --execute="GRANT ALL PRIVILEGES ON *.* TO '$TEST_DB_USERNAME'@'localhost'" 2>/dev/null
+    - mysql --user="root" --password="12345" --execute="FLUSH PRIVILEGES" 2>/dev/null
+    - service mysql restart
+    # Install and configure the application and DB
+    - composer install
+    - cp .env.example .env.testing
+    - export APP_NAME="$APP_NAME"
+    - export APP_URL="http://localhost"
+    - export FRONTEND_URL="http://localhost"
+    - export MAIL_DRIVER="log"
+    - export DB_DATABASE="$TEST_DB_NAME"
+    - export DB_USERNAME="$TEST_DB_USERNAME"
+    - export DB_PASSWORD="$TEST_DB_PASSWORD"
+    - php artisan key:generate --env=testing
+    - php artisan migrate --env=testing
+    - php artisan passport:install --env=testing
+    # Run the unit tests
+    - php vendor/bin/phpunit
+
+
+deploy:
+  stage: deploy
+  only:
+    - develop
+    - test
+    - stage
+    - uat
+  script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$DEV_SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    # Install and configure the application
+    - composer install
+    - composer global require laravel/envoy
+    - ~/.composer/vendor/bin/envoy run deploy --branch="$CI_COMMIT_REF_NAME"
+
+
+notify_success:
+  stage: notify
+  when: on_success
+  only:
+    - develop
+    - test
+    - stage
+    - uat
+    - master
+  script:
+    - if [[ "${CI_COMMIT_REF_NAME}" == "develop" ]] ; then ENV_URL=$DEV_APP_URL ; fi
+    - if [[ "${CI_COMMIT_REF_NAME}" == "test" ]] ; then ENV_URL=$TEST_APP_URL ; fi
+    - if [[ "${CI_COMMIT_REF_NAME}" == "stage" ]] ; then ENV_URL=$STAGE_APP_URL ; fi
+    - if [[ "${CI_COMMIT_REF_NAME}" == "uat" ]] ; then ENV_URL=$UAT_APP_URL ; fi
+    - if [[ "${CI_COMMIT_REF_NAME}" == "master" ]] ; then ENV_URL=$PROD_APP_URL ; fi
+    - while IFS= read -r line; do if [[ "$line" =~ ^"## [".* ]]; then [[ $i > 0 ]] && break || i=1; else [[ "$line" =~ ^"###".* ]] || [[ "$line" =~ ^"-".* ]] && changelog+="\n$line"; fi; done < CHANGELOG.md
+    - curl -X POST -H 'Content-type:application/json' --data '{"attachments":[{"color":"#36a64f","pretext":"New Deployment","title":"'$APP_NAME' '$CI_COMMIT_REF_NAME'","title_link":"'$ENV_URL'","text":"'"$changelog"'","footer_icon":"https://platform.slack-edge.com/img/default_application_icon.png"}]}' $SLACK_WEBHOOK_URL
+
+
+notify_failure:
+   stage: notify
+   when: on_failure
+   variables:
+    GIT_STRATEGY: none
+   only:
+    - develop
+    - test
+    - stage
+    - uat
+    - master
+   script:
+    - if [[ "${CI_COMMIT_REF_NAME}" == "develop" ]] ; then ENV_URL=$DEV_APP_URL ; fi
+    - if [[ "${CI_COMMIT_REF_NAME}" == "test" ]] ; then ENV_URL=$TEST_APP_URL ; fi
+    - if [[ "${CI_COMMIT_REF_NAME}" == "stage" ]] ; then ENV_URL=$STAGE_APP_URL ; fi
+    - if [[ "${CI_COMMIT_REF_NAME}" == "uat" ]] ; then ENV_URL=$UAT_APP_URL ; fi
+    - if [[ "${CI_COMMIT_REF_NAME}" == "master" ]] ; then ENV_URL=$PROD_APP_URL ; fi
+    - curl -X POST -H 'Content-type:application/json' --data '{"attachments":[{"color":"#c45958","pretext":"New Deployment","title":"'$APP_NAME' '$CI_COMMIT_REF_NAME'","title_link":"'$ENV_URL'","text":"New '$APP_NAME' deployment failed!","footer_icon":"https://platform.slack-edge.com/img/default_application_icon.png"}]}' $SLACK_WEBHOOK_URL
+

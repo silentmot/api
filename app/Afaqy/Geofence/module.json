@@ -1,0 +1,13 @@
+{
+    "name": "Geofence",
+    "alias": "geofence",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\Geofence\\Providers\\GeofenceServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,13 @@
+{
+    "name": "WasteType",
+    "alias": "wastetype",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\WasteType\\Providers\\WasteTypeServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,13 @@
+{
+    "name": "District",
+    "alias": "district",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\District\\Providers\\DistrictServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

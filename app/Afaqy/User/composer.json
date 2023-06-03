@@ -1,0 +1,39 @@
+{
+    "name": "Afaqy/user-module",
+    "description": "The user module for Afaqy back-end team.",
+    "type" : "laravel-module",
+    "authors": [
+        {
+            "name": "Afaqy Company",
+            "email": "info@afaqy.com"
+        },
+        {
+            "name": "Abdulrahman Asaad",
+            "email": "a.asaad@afaqy.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "Afaqy/core-module": "dev-master",
+        "tucker-eric/eloquentfilter": "^2.1"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.0",
+        "nwidart/laravel-modules": "^6.2",
+        "phpunit/phpunit": "^8.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Afaqy\\User\\Providers\\UserServiceProvider"
+            ],
+            "aliases": {
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Afaqy\\User\\": ""
+        }
+    }
+}

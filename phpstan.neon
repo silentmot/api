@@ -1,0 +1,17 @@
+includes:
+    - vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    level: 5
+    ignoreErrors:
+        - '#Undefined variable: \$factory#'
+        - '#Call to an undefined method Mockery\\Expectation::shouldReceive\(\).#'
+        - '#Parameter \#1 \$key of method EloquentFilter\\ModelFilter::input\(\) expects null, string given.#'
+        - '#Call to an undefined method Afaqy\\[a-zA-Z0-9\\():_]+\\Models\\Filters\\ModelFilter::[a-zA-Z0-9\\():_]+#'
+        - '#Method Afaqy\\User\\Models\\User::findForPassport\(\) should return Afaqy\\User\\Models\\User but returns Illuminate\\Database\\Eloquent\\Collection\&iterable\<int, \$this\(Afaqy\\User\\Models\\User\)\>.#'
+    excludes_analyse:
+        - *_table.php
+        - *_tables.php
+        - %rootDir%/../../../app/Afaqy/Core/Console/LaravelModules/*
+        - %rootDir%/../../../app/Afaqy/Core/Tests/Unit/Console/*
+        - %rootDir%/../../../app/Afaqy/*/Database/Seeders/*

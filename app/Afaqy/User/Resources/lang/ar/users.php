@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'users'             => 'المستخدمين',
+    'user'              => 'مستخدم',
+    'positions'         => [
+        'owner'             => 'المالك',
+        'administrator'     => 'مدير',
+        'employee'          => 'موظف',
+        'driver'            => 'سائق',
+        'technician'        => 'فني',
+    ],
+    'create-success'             => 'تم انشاء المستخدم بنجاح',
+    'create-failed'              => 'حدث خطأ فى انشاء مستخدم جديد',
+    'update-success'             => 'تم تعديل بيانات المستخدم بنجاح',
+    'update-failed'              => 'حدث خطأ فى تعديل بيانات المستخدم ',
+    'archive-success'            => 'User has been archived successfully.',
+    'archive-failed'             => 'Failed to archive the user',
+    'unarchive-success'          => 'User has been restored successfully.',
+    'unarchive-failed'           => 'Failed to restore the user',
+    'delete-success'             => 'تم حذف المستخدم بنجاح',
+    'delete-multi-success'       => 'تم حذف المستخدمين بنجاح.',
+    'delete-failed'              => 'حدث خطأ فى حذف مستخدم جديد',
+    'update-profile-success'     => 'تم تعديل بيانات المستخدم بنجاح.',
+    'update-profile-failed'      => 'حدث خطأ فى تعديل بيانات المستخدم',
+    'phone-format'               => 'رقم الهاتف لابد ان يبدأ بـ 05.',
+    'fail-password-belong-user'  => 'خطأ في كلمة المرور القديمة',
+    'no-white-space'             => ' غير مسموح بالمسافات',
+    'owner-user'                 => 'لا يمكن ان يوجد اكثر من مستخدم بوظيفة مدير موقع',
+];

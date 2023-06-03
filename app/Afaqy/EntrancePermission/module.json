@@ -1,0 +1,13 @@
+{
+    "name": "EntrancePermission",
+    "alias": "entrancepermission",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Afaqy\\EntrancePermission\\Providers\\EntrancePermissionServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,28 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Afaqy\Core\Http\Reports\Report;
+use Afaqy\Core\Http\Reports\Generator;
+use Illuminate\Database\Eloquent\Builder;
+
+class $CLASS$ extends Report
+{
+    use Generator;
+
+    /**
+     * @return mixed
+     */
+    public function generate()
+    {
+        # code...
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function query(): Builder
+    {
+        # code...
+    }
+}
