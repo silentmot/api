@@ -1,14 +1,12 @@
-<p align="center"><img src="/art/socialcard.png" alt="Social Card of Laravel Activity Log"></p>
+# laravel-activitylog
 
-# Log activity inside your Laravel app
+![Social Card of Laravel Activity Log](../../../art/socialcard.png)
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-activitylog.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-activitylog)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/spatie/laravel-activitylog/run-tests?label=tests)
-![Check & fix styling](https://github.com/spatie/laravel-activitylog/workflows/Check%20&%20fix%20styling/badge.svg)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-activitylog.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-activitylog)
+## Log activity inside your Laravel app
 
-The `spatie/laravel-activitylog` package provides easy to use functions to log the activities of the users of your app. It can also automatically log model events.
-The Package stores all activity in the `activity_log` table.
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-activitylog.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-activitylog) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/spatie/laravel-activitylog/run-tests?label=tests) ![Check & fix styling](https://github.com/spatie/laravel-activitylog/workflows/Check%20&%20fix%20styling/badge.svg) [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-activitylog.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-activitylog)
+
+The `spatie/laravel-activitylog` package provides easy to use functions to log the activities of the users of your app. It can also automatically log model events. The Package stores all activity in the `activity_log` table.
 
 Here's a demo of how you can use it:
 
@@ -23,6 +21,7 @@ Activity::all();
 ```
 
 Here's a more advanced example:
+
 ```php
 activity()
    ->performedOn($anEloquentModel)
@@ -37,7 +36,6 @@ $lastLoggedActivity->causer; //returns an instance of your user model
 $lastLoggedActivity->getExtraProperty('customProperty'); //returns 'customValue'
 $lastLoggedActivity->description; //returns 'Look, I logged something'
 ```
-
 
 Here's an example on [event logging](https://docs.spatie.be/laravel-activitylog/v3/advanced-usage/logging-model-events).
 
@@ -67,46 +65,48 @@ Calling `$activity->changes()` will return this array:
 ];
 ```
 
-## Support us
+### Support us
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-activitylog.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-activitylog)
+[![](https://github-ads.s3.eu-central-1.amazonaws.com/laravel-activitylog.jpg?t=1)](https://spatie.be/github-ad-click/laravel-activitylog)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
 We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
-## Documentation
+### Documentation
+
 You'll find the documentation on [https://docs.spatie.be/laravel-activitylog](https://docs.spatie.be/laravel-activitylog).
 
 Find yourself stuck using the package? Found a bug? Do you have general questions or suggestions for improving the activity log? Feel free to [create an issue on GitHub](https://github.com/spatie/laravel-activitylog/issues), we'll try to address it as soon as possible.
 
 If you've found a security issue please mail [freek@spatie.be](mailto:freek@spatie.be) instead of using the issue tracker.
 
-## Installation
+### Installation
 
 You can install the package via composer:
 
-``` bash
+```bash
 composer require spatie/laravel-activitylog
 ```
 
 The package will automatically register itself.
 
 You can publish the migration with:
+
 ```bash
 php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="migrations"
 ```
 
-*Note*: The default migration assumes you are using integers for your model IDs. If you are using UUIDs, or some other format, adjust the format of the subject_id and causer_id fields in the published migration before continuing.
+_Note_: The default migration assumes you are using integers for your model IDs. If you are using UUIDs, or some other format, adjust the format of the subject\_id and causer\_id fields in the published migration before continuing.
 
 After publishing the migration you can create the `activity_log` table by running the migrations:
-
 
 ```bash
 php artisan migrate
 ```
 
 You can optionally publish the config file with:
+
 ```bash
 php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="config"
 ```
@@ -166,36 +166,36 @@ return [
 ];
 ```
 
-## Changelog
+### Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information about recent changes.
 
-## Upgrading
+### Upgrading
 
 Please see [UPGRADING](UPGRADING.md) for details.
 
-## Testing
+### Testing
 
-``` bash
+```bash
 composer test
 ```
 
-## Contributing
+### Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-## Security
+### Security
 
 If you discover any security related issues, please email freek@spatie.be instead of using the issue tracker.
 
-## Credits
+### Credits
 
-- [Freek Van der Herten](https://github.com/freekmurze)
-- [Sebastian De Deyne](https://github.com/sebastiandedeyne)
-- [All Contributors](../../contributors)
+* [Freek Van der Herten](https://github.com/freekmurze)
+* [Sebastian De Deyne](https://github.com/sebastiandedeyne)
+* [All Contributors](../../contributors/)
 
 And a special thanks to [Caneco](https://twitter.com/caneco) for the logo ✨
 
-## License
+### License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](../laravel-fractal/LICENSE.md) for more information.

@@ -1,11 +1,8 @@
 # Flare contracts
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/facade/ignition-contracts.svg?style=flat-square)](https://packagist.org/packages/facade/ignition-contracts)
-[![Build Status](https://img.shields.io/circleci/build/gh/spatie/ignition-contracts/master.svg?token=d92a2ec635d3e408b1df80ba214a5e8d549dea09&style=flat-square)](https://travis-ci.org/facade/ignition-contracts)
-[![Quality Score](https://img.shields.io/scrutinizer/g/facade/ignition-contracts.svg?style=flat-square)](https://scrutinizer-ci.com/g/facade/ignition-contracts)
-[![Total Downloads](https://img.shields.io/packagist/dt/facade/ignition-contracts.svg?style=flat-square)](https://packagist.org/packages/facade/ignition-contracts)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/facade/ignition-contracts.svg?style=flat-square)](https://packagist.org/packages/facade/ignition-contracts) [![Build Status](https://img.shields.io/circleci/build/gh/spatie/ignition-contracts/master.svg?token=d92a2ec635d3e408b1df80ba214a5e8d549dea09\&style=flat-square)](https://travis-ci.org/facade/ignition-contracts) [![Quality Score](https://img.shields.io/scrutinizer/g/facade/ignition-contracts.svg?style=flat-square)](https://scrutinizer-ci.com/g/facade/ignition-contracts) [![Total Downloads](https://img.shields.io/packagist/dt/facade/ignition-contracts.svg?style=flat-square)](https://packagist.org/packages/facade/ignition-contracts)
 
-This repository contains the interfaces used to display solution on [Ignition](https://flareapp.io/docs/ignition-for-laravel/introduction) and [Flare](https://flareapp.io.).
+This repository contains the interfaces used to display solution on [Ignition](https://flareapp.io/docs/ignition-for-laravel/introduction) and [Flare](https://flareapp.io).
 
 ![Screenshot of solution](https://facade.github.io/ignition-contracts/screenshot.png)
 
@@ -19,13 +16,13 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Testing
 
-``` bash
+```bash
 composer test
 ```
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](../../spatie/data-transfer-object/CONTRIBUTING.md) for details.
 
 ## Security
 
@@ -33,4 +30,4 @@ If you discover any security related issues, please email support@flareapp.io in
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](../ignition/LICENSE.md) for more information.

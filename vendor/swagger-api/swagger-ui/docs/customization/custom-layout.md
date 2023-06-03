@@ -4,7 +4,8 @@
 
 By default, Swagger UI uses `BaseLayout`, which is built into the application. You can specify a different layout to be used by passing the layout's name as the `layout` parameter to Swagger UI. Be sure to provide your custom layout as a component to Swagger UI.
 
-<br>
+\
+
 
 For example, if you wanted to create a custom layout that only displayed operations, you could define an `OperationsLayout`:
 

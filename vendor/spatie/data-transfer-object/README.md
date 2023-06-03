@@ -1,10 +1,6 @@
 # Data transfer objects with batteries included
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/data-transfer-object.svg?style=flat-square)](https://packagist.org/packages/spatie/data-transfer-object)
-[![Build Status](https://img.shields.io/travis/spatie/data-transfer-object/master.svg?style=flat-square)](https://travis-ci.org/spatie/data-transfer-object)
-[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/data-transfer-object.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/data-transfer-object)
-[![StyleCI](https://github.styleci.io/repos/153632216/shield?branch=master)](https://github.styleci.io/repos/153632216)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/data-transfer-object.svg?style=flat-square)](https://packagist.org/packages/spatie/data-transfer-object)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/data-transfer-object.svg?style=flat-square)](https://packagist.org/packages/spatie/data-transfer-object) [![Build Status](https://img.shields.io/travis/spatie/data-transfer-object/master.svg?style=flat-square)](https://travis-ci.org/spatie/data-transfer-object) [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/data-transfer-object.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/data-transfer-object) [![StyleCI](https://github.styleci.io/repos/153632216/shield?branch=master)](https://github.styleci.io/repos/153632216) [![Total Downloads](https://img.shields.io/packagist/dt/spatie/data-transfer-object.svg?style=flat-square)](https://packagist.org/packages/spatie/data-transfer-object)
 
 ## Installation
 
@@ -27,12 +23,11 @@ public function handleRequest(array $dataFromRequest)
 }
 ```
 
-The goal of this package is to structure "unstructured data", which is normally stored in associative arrays.
-By structuring this data into an object, we gain several advantages:
+The goal of this package is to structure "unstructured data", which is normally stored in associative arrays. By structuring this data into an object, we gain several advantages:
 
-- We're able to type hint data transfer objects, instead of just calling them `array`.
-- By making all properties on our objects typeable, we're sure that their values are never something we didn't expect.
-- Because of typed properties, we can statically analyze them and have auto completion.
+* We're able to type hint data transfer objects, instead of just calling them `array`.
+* By making all properties on our objects typeable, we're sure that their values are never something we didn't expect.
+* Because of typed properties, we can statically analyze them and have auto completion.
 
 Let's look at the example of a JSON API call:
 
@@ -46,8 +41,7 @@ $post = $api->get('posts', 1);
 ]
 ```
 
-Working with this array is difficult, as we'll always have to refer to the documentation to know what's exactly in it. 
-This package allows you to create data transfer object definitions, classes, which will represent the data in a structured way.
+Working with this array is difficult, as we'll always have to refer to the documentation to know what's exactly in it. This package allows you to create data transfer object definitions, classes, which will represent the data in a structured way.
 
 We did our best to keep the syntax and overhead as little as possible:
 
@@ -101,8 +95,7 @@ class PostData extends DataTransferObject
 }
 ```
 
-By adding doc blocks to our properties, their values will be validated against the given type; 
-and a `TypeError` will be thrown if the value doesn't comply with the given type.
+By adding doc blocks to our properties, their values will be validated against the given type; and a `TypeError` will be thrown if the value doesn't comply with the given type.
 
 Here are the possible ways of declaring types:
 
@@ -176,8 +169,7 @@ When PHP 7.4 introduces typed properties, you'll be able to simply remove the do
 
 ### Working with collections
 
-If you're working with collections of DTOs, you probably want auto completion and proper type validation on your collections too.
-This package adds a simple collection implementation, which you can extend from.
+If you're working with collections of DTOs, you probably want auto completion and proper type validation on your collections too. This package adds a simple collection implementation, which you can extend from.
 
 ```php
 use \Spatie\DataTransferObject\DataTransferObjectCollection;
@@ -191,8 +183,7 @@ class PostCollection extends DataTransferObjectCollection
 }
 ```
 
-By overriding the `current` method, you'll get auto completion in your IDE, 
-and use the collections like so.
+By overriding the `current` method, you'll get auto completion in your IDE, and use the collections like so.
 
 ```php
 foreach ($postCollection as $postData) {
@@ -271,6 +262,7 @@ $postData = new PostData([
     ]
 ]);
 ```
+
 **Attention**: For nested type casting to work your Docblock definition needs to be a Fully Qualified Class Name (`\App\DTOs\TagData[]` instead of `TagData[]` and an use statement at the top)
 
 ### Immutability
@@ -290,7 +282,7 @@ Trying to change a property of `$postData` after it's constructed, will result i
 
 ### Helper functions
 
-There are also some helper functions provided for working with multiple properties at once. 
+There are also some helper functions provided for working with multiple properties at once.
 
 ```php
 $postData->all();
@@ -302,7 +294,7 @@ $postData
 $postData
     ->except('author')
     ->toArray();
-``` 
+```
 
 You can also chain these methods:
 
@@ -317,15 +309,13 @@ It's important to note that `except` and `only` are immutable, they won't change
 
 ### Exception handling
 
-Beside property type validation, you can also be certain that the data transfer object in its whole is always valid.
-On constructing a data transfer object, we'll validate whether all required (non-nullable) properties are set. 
-If not, a `Spatie\DataTransferObject\DataTransferObjectError` will be thrown.
+Beside property type validation, you can also be certain that the data transfer object in its whole is always valid. On constructing a data transfer object, we'll validate whether all required (non-nullable) properties are set. If not, a `Spatie\DataTransferObject\DataTransferObjectError` will be thrown.
 
 Likewise, if you're trying to set non-defined properties, you'll get a `DataTransferObjectError`.
 
 ### Testing
 
-``` bash
+```bash
 composer test
 ```
 
@@ -335,7 +325,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](../../beyondcode/laravel-dump-server/CONTRIBUTING.md) for details.
 
 ### Security
 
@@ -351,8 +341,8 @@ We publish all received postcards [on our company website](https://spatie.be/en/
 
 ## Credits
 
-- [Brent Roose](https://github.com/brendt)
-- [All Contributors](../../contributors)
+* [Brent Roose](https://github.com/brendt)
+* [All Contributors](../../contributors/)
 
 Our `Arr` class contains functions copied from Laravels `Arr` helper.
 
@@ -360,9 +350,8 @@ Our `Arr` class contains functions copied from Laravels `Arr` helper.
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
-Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie). 
-All pledges will be dedicated to allocating workforce on maintenance and new awesome stuff.
+Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie). All pledges will be dedicated to allocating workforce on maintenance and new awesome stuff.
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](../laravel-activitylog/LICENSE.md) for more information.
