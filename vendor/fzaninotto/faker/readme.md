@@ -1,59 +1,61 @@
-# Faker
+# faker
+
+## Faker
 
 Faker is a PHP library that generates fake data for you. Whether you need to bootstrap your database, create good-looking XML documents, fill-in your persistence to stress test it, or anonymize data taken from a production service, Faker is for you.
 
-Faker is heavily inspired by Perl's [Data::Faker](http://search.cpan.org/~jasonk/Data-Faker-0.07/), and by ruby's [Faker](https://rubygems.org/gems/faker).
+Faker is heavily inspired by Perl's [Data::Faker](http://search.cpan.org/\~jasonk/Data-Faker-0.07/), and by ruby's [Faker](https://rubygems.org/gems/faker).
 
 Faker requires PHP >= 5.3.3.
 
 [![Monthly Downloads](https://poser.pugx.org/fzaninotto/faker/d/monthly.png)](https://packagist.org/packages/fzaninotto/faker) [![Build Status](https://travis-ci.org/fzaninotto/Faker.svg?branch=master)](https://travis-ci.org/fzaninotto/Faker) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/eceb78a9-38d4-4ad5-8b6b-b52f323e3549/mini.png)](https://insight.sensiolabs.com/projects/eceb78a9-38d4-4ad5-8b6b-b52f323e3549)
 
-# Table of Contents
+## Table of Contents
 
-- [Installation](#installation)
-- [Basic Usage](#basic-usage)
-- [Formatters](#formatters)
-	- [Base](#fakerproviderbase)
-	- [Lorem Ipsum Text](#fakerproviderlorem)
-	- [Person](#fakerprovideren_usperson)
-	- [Address](#fakerprovideren_usaddress)
-	- [Phone Number](#fakerprovideren_usphonenumber)
-	- [Company](#fakerprovideren_uscompany)
-	- [Real Text](#fakerprovideren_ustext)
-	- [Date and Time](#fakerproviderdatetime)
-	- [Internet](#fakerproviderinternet)
-	- [User Agent](#fakerprovideruseragent)
-	- [Payment](#fakerproviderpayment)
-	- [Color](#fakerprovidercolor)
-	- [File](#fakerproviderfile)
-	- [Image](#fakerproviderimage)
-	- [Uuid](#fakerprovideruuid)
-	- [Barcode](#fakerproviderbarcode)
-	- [Miscellaneous](#fakerprovidermiscellaneous)
-	- [Biased](#fakerproviderbiased)
-	- [Html Lorem](#fakerproviderhtmllorem)
-- [Modifiers](#modifiers)
-- [Localization](#localization)
-- [Populating Entities Using an ORM or an ODM](#populating-entities-using-an-orm-or-an-odm)
-- [Seeding the Generator](#seeding-the-generator)
-- [Faker Internals: Understanding Providers](#faker-internals-understanding-providers)
-- [Real Life Usage](#real-life-usage)
-- [Language specific formatters](#language-specific-formatters)
-- [Third-Party Libraries Extending/Based On Faker](#third-party-libraries-extendingbased-on-faker)
-- [License](#license)
+* [Installation](./#installation)
+* [Basic Usage](./#basic-usage)
+* [Formatters](./#formatters)
+  * [Base](./#fakerproviderbase)
+  * [Lorem Ipsum Text](./#fakerproviderlorem)
+  * [Person](./#fakerprovideren\_usperson)
+  * [Address](./#fakerprovideren\_usaddress)
+  * [Phone Number](./#fakerprovideren\_usphonenumber)
+  * [Company](./#fakerprovideren\_uscompany)
+  * [Real Text](./#fakerprovideren\_ustext)
+  * [Date and Time](./#fakerproviderdatetime)
+  * [Internet](./#fakerproviderinternet)
+  * [User Agent](./#fakerprovideruseragent)
+  * [Payment](./#fakerproviderpayment)
+  * [Color](./#fakerprovidercolor)
+  * [File](./#fakerproviderfile)
+  * [Image](./#fakerproviderimage)
+  * [Uuid](./#fakerprovideruuid)
+  * [Barcode](./#fakerproviderbarcode)
+  * [Miscellaneous](./#fakerprovidermiscellaneous)
+  * [Biased](./#fakerproviderbiased)
+  * [Html Lorem](./#fakerproviderhtmllorem)
+* [Modifiers](./#modifiers)
+* [Localization](./#localization)
+* [Populating Entities Using an ORM or an ODM](./#populating-entities-using-an-orm-or-an-odm)
+* [Seeding the Generator](./#seeding-the-generator)
+* [Faker Internals: Understanding Providers](./#faker-internals-understanding-providers)
+* [Real Life Usage](./#real-life-usage)
+* [Language specific formatters](./#language-specific-formatters)
+* [Third-Party Libraries Extending/Based On Faker](./#third-party-libraries-extendingbased-on-faker)
+* [License](./#license)
 
-
-## Installation
+### Installation
 
 ```sh
 composer require fzaninotto/faker
 ```
 
-## Basic Usage
+### Basic Usage
 
-### Autoloading
+#### Autoloading
 
-Faker supports both `PSR-0` as `PSR-4` autoloaders. 
+Faker supports both `PSR-0` as `PSR-4` autoloaders.
+
 ```php
 <?php
 # When installed via composer
@@ -61,15 +63,17 @@ require_once 'vendor/autoload.php';
 ```
 
 You can also load `Fakers` shipped `PSR-0` autoloader
+
 ```php
 <?php
 # Load Fakers own autoloader
 require_once '/path/to/Faker/src/autoload.php';
 ```
 
-*alternatively, you can use any another PSR-4 compliant autoloader*
+_alternatively, you can use any another PSR-4 compliant autoloader_
 
-### Create fake data
+#### Create fake data
+
 Use `Faker\Factory::create()` to create and initialize a faker generator, which can generate data by accessing properties named after the type of data you want.
 
 ```php
@@ -111,221 +115,259 @@ for ($i = 0; $i < 10; $i++) {
 
 **Tip**: For a quick generation of fake data, you can also use Faker as a command line tool thanks to [faker-cli](https://github.com/bit3/faker-cli).
 
-## Formatters
+### Formatters
 
 Each of the generator properties (like `name`, `address`, and `lorem`) are called "formatters". A faker generator has many of them, packaged in "providers". Here is a list of the bundled formatters in the default locale.
 
-### `Faker\Provider\Base`
+#### `Faker\Provider\Base`
 
-    randomDigit             // 7
-    randomDigitNot(5)       // 0, 1, 2, 3, 4, 6, 7, 8, or 9
-    randomDigitNotNull      // 5
-    randomNumber($nbDigits = NULL, $strict = false) // 79907610
-    randomFloat($nbMaxDecimals = NULL, $min = 0, $max = NULL) // 48.8932
-    numberBetween($min = 1000, $max = 9000) // 8567
-    randomLetter            // 'b'
-    // returns randomly ordered subsequence of a provided array
-    randomElements($array = array ('a','b','c'), $count = 1) // array('c')
-    randomElement($array = array ('a','b','c')) // 'b'
-    shuffle('hello, world') // 'rlo,h eoldlw'
-    shuffle(array(1, 2, 3)) // array(2, 1, 3)
-    numerify('Hello ###') // 'Hello 609'
-    lexify('Hello ???') // 'Hello wgt'
-    bothify('Hello ##??') // 'Hello 42jz'
-    asciify('Hello ***') // 'Hello R6+'
-    regexify('[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}'); // sm0@y8k96a.ej
+```
+randomDigit             // 7
+randomDigitNot(5)       // 0, 1, 2, 3, 4, 6, 7, 8, or 9
+randomDigitNotNull      // 5
+randomNumber($nbDigits = NULL, $strict = false) // 79907610
+randomFloat($nbMaxDecimals = NULL, $min = 0, $max = NULL) // 48.8932
+numberBetween($min = 1000, $max = 9000) // 8567
+randomLetter            // 'b'
+// returns randomly ordered subsequence of a provided array
+randomElements($array = array ('a','b','c'), $count = 1) // array('c')
+randomElement($array = array ('a','b','c')) // 'b'
+shuffle('hello, world') // 'rlo,h eoldlw'
+shuffle(array(1, 2, 3)) // array(2, 1, 3)
+numerify('Hello ###') // 'Hello 609'
+lexify('Hello ???') // 'Hello wgt'
+bothify('Hello ##??') // 'Hello 42jz'
+asciify('Hello ***') // 'Hello R6+'
+regexify('[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}'); // sm0@y8k96a.ej
+```
 
-### `Faker\Provider\Lorem`
+#### `Faker\Provider\Lorem`
 
-    word                                             // 'aut'
-    words($nb = 3, $asText = false)                  // array('porro', 'sed', 'magni')
-    sentence($nbWords = 6, $variableNbWords = true)  // 'Sit vitae voluptas sint non voluptates.'
-    sentences($nb = 3, $asText = false)              // array('Optio quos qui illo error.', 'Laborum vero a officia id corporis.', 'Saepe provident esse hic eligendi.')
-    paragraph($nbSentences = 3, $variableNbSentences = true) // 'Ut ab voluptas sed a nam. Sint autem inventore aut officia aut aut blanditiis. Ducimus eos odit amet et est ut eum.'
-    paragraphs($nb = 3, $asText = false)             // array('Quidem ut sunt et quidem est accusamus aut. Fuga est placeat rerum ut. Enim ex eveniet facere sunt.', 'Aut nam et eum architecto fugit repellendus illo. Qui ex esse veritatis.', 'Possimus omnis aut incidunt sunt. Asperiores incidunt iure sequi cum culpa rem. Rerum exercitationem est rem.')
-    text($maxNbChars = 200)                          // 'Fuga totam reiciendis qui architecto fugiat nemo. Consequatur recusandae qui cupiditate eos quod.'
+```
+word                                             // 'aut'
+words($nb = 3, $asText = false)                  // array('porro', 'sed', 'magni')
+sentence($nbWords = 6, $variableNbWords = true)  // 'Sit vitae voluptas sint non voluptates.'
+sentences($nb = 3, $asText = false)              // array('Optio quos qui illo error.', 'Laborum vero a officia id corporis.', 'Saepe provident esse hic eligendi.')
+paragraph($nbSentences = 3, $variableNbSentences = true) // 'Ut ab voluptas sed a nam. Sint autem inventore aut officia aut aut blanditiis. Ducimus eos odit amet et est ut eum.'
+paragraphs($nb = 3, $asText = false)             // array('Quidem ut sunt et quidem est accusamus aut. Fuga est placeat rerum ut. Enim ex eveniet facere sunt.', 'Aut nam et eum architecto fugit repellendus illo. Qui ex esse veritatis.', 'Possimus omnis aut incidunt sunt. Asperiores incidunt iure sequi cum culpa rem. Rerum exercitationem est rem.')
+text($maxNbChars = 200)                          // 'Fuga totam reiciendis qui architecto fugiat nemo. Consequatur recusandae qui cupiditate eos quod.'
+```
 
-### `Faker\Provider\en_US\Person`
+#### `Faker\Provider\en_US\Person`
 
-    title($gender = null|'male'|'female')     // 'Ms.'
-    titleMale                                 // 'Mr.'
-    titleFemale                               // 'Ms.'
-    suffix                                    // 'Jr.'
-    name($gender = null|'male'|'female')      // 'Dr. Zane Stroman'
-    firstName($gender = null|'male'|'female') // 'Maynard'
-    firstNameMale                             // 'Maynard'
-    firstNameFemale                           // 'Rachel'
-    lastName                                  // 'Zulauf'
+```
+title($gender = null|'male'|'female')     // 'Ms.'
+titleMale                                 // 'Mr.'
+titleFemale                               // 'Ms.'
+suffix                                    // 'Jr.'
+name($gender = null|'male'|'female')      // 'Dr. Zane Stroman'
+firstName($gender = null|'male'|'female') // 'Maynard'
+firstNameMale                             // 'Maynard'
+firstNameFemale                           // 'Rachel'
+lastName                                  // 'Zulauf'
+```
 
-### `Faker\Provider\en_US\Address`
+#### `Faker\Provider\en_US\Address`
 
-    cityPrefix                          // 'Lake'
-    secondaryAddress                    // 'Suite 961'
-    state                               // 'NewMexico'
-    stateAbbr                           // 'OH'
-    citySuffix                          // 'borough'
-    streetSuffix                        // 'Keys'
-    buildingNumber                      // '484'
-    city                                // 'West Judge'
-    streetName                          // 'Keegan Trail'
-    streetAddress                       // '439 Karley Loaf Suite 897'
-    postcode                            // '17916'
-    address                             // '8888 Cummings Vista Apt. 101, Susanbury, NY 95473'
-    country                             // 'Falkland Islands (Malvinas)'
-    latitude($min = -90, $max = 90)     // 77.147489
-    longitude($min = -180, $max = 180)  // 86.211205
+```
+cityPrefix                          // 'Lake'
+secondaryAddress                    // 'Suite 961'
+state                               // 'NewMexico'
+stateAbbr                           // 'OH'
+citySuffix                          // 'borough'
+streetSuffix                        // 'Keys'
+buildingNumber                      // '484'
+city                                // 'West Judge'
+streetName                          // 'Keegan Trail'
+streetAddress                       // '439 Karley Loaf Suite 897'
+postcode                            // '17916'
+address                             // '8888 Cummings Vista Apt. 101, Susanbury, NY 95473'
+country                             // 'Falkland Islands (Malvinas)'
+latitude($min = -90, $max = 90)     // 77.147489
+longitude($min = -180, $max = 180)  // 86.211205
+```
 
-### `Faker\Provider\en_US\PhoneNumber`
+#### `Faker\Provider\en_US\PhoneNumber`
 
-    phoneNumber             // '201-886-0269 x3767'
-    tollFreePhoneNumber     // '(888) 937-7238'
-    e164PhoneNumber     // '+27113456789'
+```
+phoneNumber             // '201-886-0269 x3767'
+tollFreePhoneNumber     // '(888) 937-7238'
+e164PhoneNumber     // '+27113456789'
+```
 
-### `Faker\Provider\en_US\Company`
+#### `Faker\Provider\en_US\Company`
 
-    catchPhrase             // 'Monitored regional contingency'
-    bs                      // 'e-enable robust architectures'
-    company                 // 'Bogan-Treutel'
-    companySuffix           // 'and Sons'
-    jobTitle                // 'Cashier'
+```
+catchPhrase             // 'Monitored regional contingency'
+bs                      // 'e-enable robust architectures'
+company                 // 'Bogan-Treutel'
+companySuffix           // 'and Sons'
+jobTitle                // 'Cashier'
+```
 
-### `Faker\Provider\en_US\Text`
+#### `Faker\Provider\en_US\Text`
 
-    realText($maxNbChars = 200, $indexSize = 2) // "And yet I wish you could manage it?) 'And what are they made of?' Alice asked in a shrill, passionate voice. 'Would YOU like cats if you were never even spoke to Time!' 'Perhaps not,' Alice replied."
+```
+realText($maxNbChars = 200, $indexSize = 2) // "And yet I wish you could manage it?) 'And what are they made of?' Alice asked in a shrill, passionate voice. 'Would YOU like cats if you were never even spoke to Time!' 'Perhaps not,' Alice replied."
+```
 
-### `Faker\Provider\DateTime`
+#### `Faker\Provider\DateTime`
 
-    unixTime($max = 'now')                // 58781813
-    dateTime($max = 'now', $timezone = null) // DateTime('2008-04-25 08:37:17', 'UTC')
-    dateTimeAD($max = 'now', $timezone = null) // DateTime('1800-04-29 20:38:49', 'Europe/Paris')
-    iso8601($max = 'now')                 // '1978-12-09T10:10:29+0000'
-    date($format = 'Y-m-d', $max = 'now') // '1979-06-09'
-    time($format = 'H:i:s', $max = 'now') // '20:49:42'
-    dateTimeBetween($startDate = '-30 years', $endDate = 'now', $timezone = null) // DateTime('2003-03-15 02:00:49', 'Africa/Lagos')
-    dateTimeInInterval($startDate = '-30 years', $interval = '+ 5 days', $timezone = null) // DateTime('2003-03-15 02:00:49', 'Antartica/Vostok')
-    dateTimeThisCentury($max = 'now', $timezone = null)     // DateTime('1915-05-30 19:28:21', 'UTC')
-    dateTimeThisDecade($max = 'now', $timezone = null)      // DateTime('2007-05-29 22:30:48', 'Europe/Paris')
-    dateTimeThisYear($max = 'now', $timezone = null)        // DateTime('2011-02-27 20:52:14', 'Africa/Lagos')
-    dateTimeThisMonth($max = 'now', $timezone = null)       // DateTime('2011-10-23 13:46:23', 'Antarctica/Vostok')
-    amPm($max = 'now')                    // 'pm'
-    dayOfMonth($max = 'now')              // '04'
-    dayOfWeek($max = 'now')               // 'Friday'
-    month($max = 'now')                   // '06'
-    monthName($max = 'now')               // 'January'
-    year($max = 'now')                    // '1993'
-    century                               // 'VI'
-    timezone                              // 'Europe/Paris'
+```
+unixTime($max = 'now')                // 58781813
+dateTime($max = 'now', $timezone = null) // DateTime('2008-04-25 08:37:17', 'UTC')
+dateTimeAD($max = 'now', $timezone = null) // DateTime('1800-04-29 20:38:49', 'Europe/Paris')
+iso8601($max = 'now')                 // '1978-12-09T10:10:29+0000'
+date($format = 'Y-m-d', $max = 'now') // '1979-06-09'
+time($format = 'H:i:s', $max = 'now') // '20:49:42'
+dateTimeBetween($startDate = '-30 years', $endDate = 'now', $timezone = null) // DateTime('2003-03-15 02:00:49', 'Africa/Lagos')
+dateTimeInInterval($startDate = '-30 years', $interval = '+ 5 days', $timezone = null) // DateTime('2003-03-15 02:00:49', 'Antartica/Vostok')
+dateTimeThisCentury($max = 'now', $timezone = null)     // DateTime('1915-05-30 19:28:21', 'UTC')
+dateTimeThisDecade($max = 'now', $timezone = null)      // DateTime('2007-05-29 22:30:48', 'Europe/Paris')
+dateTimeThisYear($max = 'now', $timezone = null)        // DateTime('2011-02-27 20:52:14', 'Africa/Lagos')
+dateTimeThisMonth($max = 'now', $timezone = null)       // DateTime('2011-10-23 13:46:23', 'Antarctica/Vostok')
+amPm($max = 'now')                    // 'pm'
+dayOfMonth($max = 'now')              // '04'
+dayOfWeek($max = 'now')               // 'Friday'
+month($max = 'now')                   // '06'
+monthName($max = 'now')               // 'January'
+year($max = 'now')                    // '1993'
+century                               // 'VI'
+timezone                              // 'Europe/Paris'
+```
 
 Methods accepting a `$timezone` argument default to `date_default_timezone_get()`. You can pass a custom timezone string to each method, or define a custom timezone for all time methods at once using `$faker::setDefaultTimezone($timezone)`.
 
-### `Faker\Provider\Internet`
+#### `Faker\Provider\Internet`
 
-    email                   // 'tkshlerin@collins.com'
-    safeEmail               // 'king.alford@example.org'
-    freeEmail               // 'bradley72@gmail.com'
-    companyEmail            // 'russel.durward@mcdermott.org'
-    freeEmailDomain         // 'yahoo.com'
-    safeEmailDomain         // 'example.org'
-    userName                // 'wade55'
-    password                // 'k&|X+a45*2['
-    domainName              // 'wolffdeckow.net'
-    domainWord              // 'feeney'
-    tld                     // 'biz'
-    url                     // 'http://www.skilesdonnelly.biz/aut-accusantium-ut-architecto-sit-et.html'
-    slug                    // 'aut-repellat-commodi-vel-itaque-nihil-id-saepe-nostrum'
-    ipv4                    // '109.133.32.252'
-    localIpv4               // '10.242.58.8'
-    ipv6                    // '8e65:933d:22ee:a232:f1c1:2741:1f10:117c'
-    macAddress              // '43:85:B7:08:10:CA'
+```
+email                   // 'tkshlerin@collins.com'
+safeEmail               // 'king.alford@example.org'
+freeEmail               // 'bradley72@gmail.com'
+companyEmail            // 'russel.durward@mcdermott.org'
+freeEmailDomain         // 'yahoo.com'
+safeEmailDomain         // 'example.org'
+userName                // 'wade55'
+password                // 'k&|X+a45*2['
+domainName              // 'wolffdeckow.net'
+domainWord              // 'feeney'
+tld                     // 'biz'
+url                     // 'http://www.skilesdonnelly.biz/aut-accusantium-ut-architecto-sit-et.html'
+slug                    // 'aut-repellat-commodi-vel-itaque-nihil-id-saepe-nostrum'
+ipv4                    // '109.133.32.252'
+localIpv4               // '10.242.58.8'
+ipv6                    // '8e65:933d:22ee:a232:f1c1:2741:1f10:117c'
+macAddress              // '43:85:B7:08:10:CA'
+```
 
-### `Faker\Provider\UserAgent`
+#### `Faker\Provider\UserAgent`
 
-    userAgent              // 'Mozilla/5.0 (Windows CE) AppleWebKit/5350 (KHTML, like Gecko) Chrome/13.0.888.0 Safari/5350'
-    chrome                 // 'Mozilla/5.0 (Macintosh; PPC Mac OS X 10_6_5) AppleWebKit/5312 (KHTML, like Gecko) Chrome/14.0.894.0 Safari/5312'
-    firefox                // 'Mozilla/5.0 (X11; Linuxi686; rv:7.0) Gecko/20101231 Firefox/3.6'
-    safari                 // 'Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10_7_1 rv:3.0; en-US) AppleWebKit/534.11.3 (KHTML, like Gecko) Version/4.0 Safari/534.11.3'
-    opera                  // 'Opera/8.25 (Windows NT 5.1; en-US) Presto/2.9.188 Version/10.00'
-    internetExplorer       // 'Mozilla/5.0 (compatible; MSIE 7.0; Windows 98; Win 9x 4.90; Trident/3.0)'
+```
+userAgent              // 'Mozilla/5.0 (Windows CE) AppleWebKit/5350 (KHTML, like Gecko) Chrome/13.0.888.0 Safari/5350'
+chrome                 // 'Mozilla/5.0 (Macintosh; PPC Mac OS X 10_6_5) AppleWebKit/5312 (KHTML, like Gecko) Chrome/14.0.894.0 Safari/5312'
+firefox                // 'Mozilla/5.0 (X11; Linuxi686; rv:7.0) Gecko/20101231 Firefox/3.6'
+safari                 // 'Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10_7_1 rv:3.0; en-US) AppleWebKit/534.11.3 (KHTML, like Gecko) Version/4.0 Safari/534.11.3'
+opera                  // 'Opera/8.25 (Windows NT 5.1; en-US) Presto/2.9.188 Version/10.00'
+internetExplorer       // 'Mozilla/5.0 (compatible; MSIE 7.0; Windows 98; Win 9x 4.90; Trident/3.0)'
+```
 
-### `Faker\Provider\Payment`
+#### `Faker\Provider\Payment`
 
-    creditCardType          // 'MasterCard'
-    creditCardNumber        // '4485480221084675'
-    creditCardExpirationDate // 04/13
-    creditCardExpirationDateString // '04/13'
-    creditCardDetails       // array('MasterCard', '4485480221084675', 'Aleksander Nowak', '04/13')
-    // Generates a random IBAN. Set $countryCode to null for a random country
-    iban($countryCode)      // 'IT31A8497112740YZ575DJ28BP4'
-    swiftBicNumber          // 'RZTIAT22263'
+```
+creditCardType          // 'MasterCard'
+creditCardNumber        // '4485480221084675'
+creditCardExpirationDate // 04/13
+creditCardExpirationDateString // '04/13'
+creditCardDetails       // array('MasterCard', '4485480221084675', 'Aleksander Nowak', '04/13')
+// Generates a random IBAN. Set $countryCode to null for a random country
+iban($countryCode)      // 'IT31A8497112740YZ575DJ28BP4'
+swiftBicNumber          // 'RZTIAT22263'
+```
 
-### `Faker\Provider\Color`
+#### `Faker\Provider\Color`
 
-    hexcolor               // '#fa3cc2'
-    rgbcolor               // '0,255,122'
-    rgbColorAsArray        // array(0,255,122)
-    rgbCssColor            // 'rgb(0,255,122)'
-    safeColorName          // 'fuchsia'
-    colorName              // 'Gainsbor'
-    hslColor               // '340,50,20'
-    hslColorAsArray        // array(340,50,20)
+```
+hexcolor               // '#fa3cc2'
+rgbcolor               // '0,255,122'
+rgbColorAsArray        // array(0,255,122)
+rgbCssColor            // 'rgb(0,255,122)'
+safeColorName          // 'fuchsia'
+colorName              // 'Gainsbor'
+hslColor               // '340,50,20'
+hslColorAsArray        // array(340,50,20)
+```
 
-### `Faker\Provider\File`
+#### `Faker\Provider\File`
 
-    fileExtension          // 'avi'
-    mimeType               // 'video/x-msvideo'
-    // Copy a random file from the source to the target directory and returns the fullpath or filename
-    file($sourceDir = '/tmp', $targetDir = '/tmp') // '/path/to/targetDir/13b73edae8443990be1aa8f1a483bc27.jpg'
-    file($sourceDir, $targetDir, false) // '13b73edae8443990be1aa8f1a483bc27.jpg'
+```
+fileExtension          // 'avi'
+mimeType               // 'video/x-msvideo'
+// Copy a random file from the source to the target directory and returns the fullpath or filename
+file($sourceDir = '/tmp', $targetDir = '/tmp') // '/path/to/targetDir/13b73edae8443990be1aa8f1a483bc27.jpg'
+file($sourceDir, $targetDir, false) // '13b73edae8443990be1aa8f1a483bc27.jpg'
+```
 
-### `Faker\Provider\Image`
+#### `Faker\Provider\Image`
 
-    // Image generation provided by LoremPixel (http://lorempixel.com/)
-    imageUrl($width = 640, $height = 480) // 'http://lorempixel.com/640/480/'
-    imageUrl($width, $height, 'cats')     // 'http://lorempixel.com/800/600/cats/'
-    imageUrl($width, $height, 'cats', true, 'Faker') // 'http://lorempixel.com/800/400/cats/Faker'
-    imageUrl($width, $height, 'cats', true, 'Faker', true) // 'http://lorempixel.com/gray/800/400/cats/Faker/' Monochrome image
-    image($dir = '/tmp', $width = 640, $height = 480) // '/tmp/13b73edae8443990be1aa8f1a483bc27.jpg'
-    image($dir, $width, $height, 'cats')  // 'tmp/13b73edae8443990be1aa8f1a483bc27.jpg' it's a cat!
-    image($dir, $width, $height, 'cats', false) // '13b73edae8443990be1aa8f1a483bc27.jpg' it's a filename without path
-    image($dir, $width, $height, 'cats', true, false) // it's a no randomize images (default: `true`)
-    image($dir, $width, $height, 'cats', true, true, 'Faker') // 'tmp/13b73edae8443990be1aa8f1a483bc27.jpg' it's a cat with 'Faker' text. Default, `null`.
+```
+// Image generation provided by LoremPixel (http://lorempixel.com/)
+imageUrl($width = 640, $height = 480) // 'http://lorempixel.com/640/480/'
+imageUrl($width, $height, 'cats')     // 'http://lorempixel.com/800/600/cats/'
+imageUrl($width, $height, 'cats', true, 'Faker') // 'http://lorempixel.com/800/400/cats/Faker'
+imageUrl($width, $height, 'cats', true, 'Faker', true) // 'http://lorempixel.com/gray/800/400/cats/Faker/' Monochrome image
+image($dir = '/tmp', $width = 640, $height = 480) // '/tmp/13b73edae8443990be1aa8f1a483bc27.jpg'
+image($dir, $width, $height, 'cats')  // 'tmp/13b73edae8443990be1aa8f1a483bc27.jpg' it's a cat!
+image($dir, $width, $height, 'cats', false) // '13b73edae8443990be1aa8f1a483bc27.jpg' it's a filename without path
+image($dir, $width, $height, 'cats', true, false) // it's a no randomize images (default: `true`)
+image($dir, $width, $height, 'cats', true, true, 'Faker') // 'tmp/13b73edae8443990be1aa8f1a483bc27.jpg' it's a cat with 'Faker' text. Default, `null`.
+```
 
-### `Faker\Provider\Uuid`
+#### `Faker\Provider\Uuid`
 
-    uuid                   // '7e57d004-2b97-0e7a-b45f-5387367791cd'
+```
+uuid                   // '7e57d004-2b97-0e7a-b45f-5387367791cd'
+```
 
-### `Faker\Provider\Barcode`
+#### `Faker\Provider\Barcode`
 
-    ean13          // '4006381333931'
-    ean8           // '73513537'
-    isbn13         // '9790404436093'
-    isbn10         // '4881416324'
+```
+ean13          // '4006381333931'
+ean8           // '73513537'
+isbn13         // '9790404436093'
+isbn10         // '4881416324'
+```
 
-### `Faker\Provider\Miscellaneous`
+#### `Faker\Provider\Miscellaneous`
 
-    boolean // false
-    boolean($chanceOfGettingTrue = 50) // true
-    md5           // 'de99a620c50f2990e87144735cd357e7'
-    sha1          // 'f08e7f04ca1a413807ebc47551a40a20a0b4de5c'
-    sha256        // '0061e4c60dac5c1d82db0135a42e00c89ae3a333e7c26485321f24348c7e98a5'
-    locale        // en_UK
-    countryCode   // UK
-    languageCode  // en
-    currencyCode  // EUR
-    emoji         // 😁
+```
+boolean // false
+boolean($chanceOfGettingTrue = 50) // true
+md5           // 'de99a620c50f2990e87144735cd357e7'
+sha1          // 'f08e7f04ca1a413807ebc47551a40a20a0b4de5c'
+sha256        // '0061e4c60dac5c1d82db0135a42e00c89ae3a333e7c26485321f24348c7e98a5'
+locale        // en_UK
+countryCode   // UK
+languageCode  // en
+currencyCode  // EUR
+emoji         // 😁
+```
 
-### `Faker\Provider\Biased`
+#### `Faker\Provider\Biased`
 
-    // get a random number between 10 and 20,
-    // with more chances to be close to 20
-    biasedNumberBetween($min = 10, $max = 20, $function = 'sqrt')
+```
+// get a random number between 10 and 20,
+// with more chances to be close to 20
+biasedNumberBetween($min = 10, $max = 20, $function = 'sqrt')
+```
 
-### `Faker\Provider\HtmlLorem`
+#### `Faker\Provider\HtmlLorem`
 
-    //Generate HTML document which is no more than 2 levels deep, and no more than 3 elements wide at any level.
-    randomHtml(2,3)   // <html><head><title>Aut illo dolorem et accusantium eum.</title></head><body><form action="example.com" method="POST"><label for="username">sequi</label><input type="text" id="username"><label for="password">et</label><input type="password" id="password"></form><b>Id aut saepe non mollitia voluptas voluptas.</b><table><thead><tr><tr>Non consequatur.</tr><tr>Incidunt est.</tr><tr>Aut voluptatem.</tr><tr>Officia voluptas rerum quo.</tr><tr>Asperiores similique.</tr></tr></thead><tbody><tr><td>Sapiente dolorum dolorem sint laboriosam commodi qui.</td><td>Commodi nihil nesciunt eveniet quo repudiandae.</td><td>Voluptates explicabo numquam distinctio necessitatibus repellat.</td><td>Provident ut doloremque nam eum modi aspernatur.</td><td>Iusto inventore.</td></tr><tr><td>Animi nihil ratione id mollitia libero ipsa quia tempore.</td><td>Velit est officia et aut tenetur dolorem sed mollitia expedita.</td><td>Modi modi repudiandae pariatur voluptas rerum ea incidunt non molestiae eligendi eos deleniti.</td><td>Exercitationem voluptatibus dolor est iste quod molestiae.</td><td>Quia reiciendis.</td></tr><tr><td>Inventore impedit exercitationem voluptatibus rerum cupiditate.</td><td>Qui.</td><td>Aliquam.</td><td>Autem nihil aut et.</td><td>Dolor ut quia error.</td></tr><tr><td>Enim facilis iusto earum et minus rerum assumenda quis quia.</td><td>Reprehenderit ut sapiente occaecati voluptatum dolor voluptatem vitae qui velit.</td><td>Quod fugiat non.</td><td>Sunt nobis totam mollitia sed nesciunt est deleniti cumque.</td><td>Repudiandae quo.</td></tr><tr><td>Modi dicta libero quisquam doloremque qui autem.</td><td>Voluptatem aliquid saepe laudantium facere eos sunt dolor.</td><td>Est eos quis laboriosam officia expedita repellendus quia natus.</td><td>Et neque delectus quod fugit enim repudiandae qui.</td><td>Fugit soluta sit facilis facere repellat culpa magni voluptatem maiores tempora.</td></tr><tr><td>Enim dolores doloremque.</td><td>Assumenda voluptatem eum perferendis exercitationem.</td><td>Quasi in fugit deserunt ea perferendis sunt nemo consequatur dolorum soluta.</td><td>Maxime repellat qui numquam voluptatem est modi.</td><td>Alias rerum rerum hic hic eveniet.</td></tr><tr><td>Tempore voluptatem.</td><td>Eaque.</td><td>Et sit quas fugit iusto.</td><td>Nemo nihil rerum dignissimos et esse.</td><td>Repudiandae ipsum numquam.</td></tr><tr><td>Nemo sunt quia.</td><td>Sint tempore est neque ducimus harum sed.</td><td>Dicta placeat atque libero nihil.</td><td>Et qui aperiam temporibus facilis eum.</td><td>Ut dolores qui enim et maiores nesciunt.</td></tr><tr><td>Dolorum totam sint debitis saepe laborum.</td><td>Quidem corrupti ea.</td><td>Cum voluptas quod.</td><td>Possimus consequatur quasi dolorem ut et.</td><td>Et velit non hic labore repudiandae quis.</td></tr></tbody></table></body></html>
+```
+//Generate HTML document which is no more than 2 levels deep, and no more than 3 elements wide at any level.
+randomHtml(2,3)   // <html><head><title>Aut illo dolorem et accusantium eum.</title></head><body><form action="example.com" method="POST"><label for="username">sequi</label><input type="text" id="username"><label for="password">et</label><input type="password" id="password"></form><b>Id aut saepe non mollitia voluptas voluptas.</b><table><thead><tr><tr>Non consequatur.</tr><tr>Incidunt est.</tr><tr>Aut voluptatem.</tr><tr>Officia voluptas rerum quo.</tr><tr>Asperiores similique.</tr></tr></thead><tbody><tr><td>Sapiente dolorum dolorem sint laboriosam commodi qui.</td><td>Commodi nihil nesciunt eveniet quo repudiandae.</td><td>Voluptates explicabo numquam distinctio necessitatibus repellat.</td><td>Provident ut doloremque nam eum modi aspernatur.</td><td>Iusto inventore.</td></tr><tr><td>Animi nihil ratione id mollitia libero ipsa quia tempore.</td><td>Velit est officia et aut tenetur dolorem sed mollitia expedita.</td><td>Modi modi repudiandae pariatur voluptas rerum ea incidunt non molestiae eligendi eos deleniti.</td><td>Exercitationem voluptatibus dolor est iste quod molestiae.</td><td>Quia reiciendis.</td></tr><tr><td>Inventore impedit exercitationem voluptatibus rerum cupiditate.</td><td>Qui.</td><td>Aliquam.</td><td>Autem nihil aut et.</td><td>Dolor ut quia error.</td></tr><tr><td>Enim facilis iusto earum et minus rerum assumenda quis quia.</td><td>Reprehenderit ut sapiente occaecati voluptatum dolor voluptatem vitae qui velit.</td><td>Quod fugiat non.</td><td>Sunt nobis totam mollitia sed nesciunt est deleniti cumque.</td><td>Repudiandae quo.</td></tr><tr><td>Modi dicta libero quisquam doloremque qui autem.</td><td>Voluptatem aliquid saepe laudantium facere eos sunt dolor.</td><td>Est eos quis laboriosam officia expedita repellendus quia natus.</td><td>Et neque delectus quod fugit enim repudiandae qui.</td><td>Fugit soluta sit facilis facere repellat culpa magni voluptatem maiores tempora.</td></tr><tr><td>Enim dolores doloremque.</td><td>Assumenda voluptatem eum perferendis exercitationem.</td><td>Quasi in fugit deserunt ea perferendis sunt nemo consequatur dolorum soluta.</td><td>Maxime repellat qui numquam voluptatem est modi.</td><td>Alias rerum rerum hic hic eveniet.</td></tr><tr><td>Tempore voluptatem.</td><td>Eaque.</td><td>Et sit quas fugit iusto.</td><td>Nemo nihil rerum dignissimos et esse.</td><td>Repudiandae ipsum numquam.</td></tr><tr><td>Nemo sunt quia.</td><td>Sint tempore est neque ducimus harum sed.</td><td>Dicta placeat atque libero nihil.</td><td>Et qui aperiam temporibus facilis eum.</td><td>Ut dolores qui enim et maiores nesciunt.</td></tr><tr><td>Dolorum totam sint debitis saepe laborum.</td><td>Quidem corrupti ea.</td><td>Cum voluptas quod.</td><td>Possimus consequatur quasi dolorem ut et.</td><td>Et velit non hic labore repudiandae quis.</td></tr></tbody></table></body></html>
+```
 
-## Modifiers
+### Modifiers
 
 Faker provides three special providers, `unique()`, `optional()`, and `valid()`, to be called before any provider.
 
@@ -395,9 +437,9 @@ If you would like to use a modifier with a value not generated by Faker, use the
 $faker->optional()->passthrough(mt_rand(5, 15));
 ```
 
-## Localization
+### Localization
 
-`Faker\Factory` can take a locale as an argument, to return localized data. If no localized provider is found, the factory fallbacks to the default locale (en_US).
+`Faker\Factory` can take a locale as an argument, to return localized data. If no localized provider is found, the factory fallbacks to the default locale (en\_US).
 
 ```php
 <?php
@@ -419,14 +461,13 @@ for ($i = 0; $i < 10; $i++) {
 
 You can check available Faker locales in the source code, [under the `Provider` directory](https://github.com/fzaninotto/Faker/tree/master/src/Faker/Provider). The localization of Faker is an ongoing process, for which we need your help. Don't hesitate to create localized providers to your own locale and submit a PR!
 
-## Populating Entities Using an ORM or an ODM
+### Populating Entities Using an ORM or an ODM
 
 Faker provides adapters for Object-Relational and Object-Document Mappers (currently, [Propel](http://www.propelorm.org), [Doctrine2](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/), [CakePHP](http://cakephp.org), [Spot2](https://github.com/vlucas/spot2), [Mandango](https://github.com/mandango/mandango) and [Eloquent](https://laravel.com/docs/master/eloquent) are supported). These adapters ease the population of databases through the Entity classes provided by an ORM library (or the population of document stores using Document classes provided by an ODM library).
 
 To populate entities, create a new populator class (using a generator instance as parameter), then list the class and number of all the entities that must be generated. To launch the actual data population, call the `execute()` method.
 
-Note that some of the `populators` could require additional parameters. As example the `doctrine` populator has an option to specify
-its batchSize on how often it will flush the UnitOfWork to the database.
+Note that some of the `populators` could require additional parameters. As example the `doctrine` populator has an option to specify its batchSize on how often it will flush the UnitOfWork to the database.
 
 Here is an example showing how to populate 5 `Author` and 10 `Book` objects:
 
@@ -484,7 +525,7 @@ $populator->addEntity('Book', 5, array(), array(
 ));
 ```
 
-## Seeding the Generator
+### Seeding the Generator
 
 You may want to get always the same generated data - for instance when using Faker for unit testing purposes. The generator offers a `seed()` method, which seeds the random number generator. Calling the same script twice with the same seed produces the same results.
 
@@ -516,9 +557,7 @@ echo $faker->name; // 'Jess Mraz I';
 > $faker->realText($faker->numberBetween(10,20));
 > ```
 
-
-
-## Faker Internals: Understanding Providers
+### Faker Internals: Understanding Providers
 
 A `Faker\Generator` alone can't do much generation. It needs `Faker\Provider` objects to delegate the data generation to them. `Faker\Factory::create()` actually creates a `Faker\Generator` bundled with the default providers. Here is what happens under the hood:
 
@@ -531,7 +570,7 @@ $faker->addProvider(new Faker\Provider\en_US\PhoneNumber($faker));
 $faker->addProvider(new Faker\Provider\en_US\Company($faker));
 $faker->addProvider(new Faker\Provider\Lorem($faker));
 $faker->addProvider(new Faker\Provider\Internet($faker));
-````
+```
 
 Whenever you try to access a property on the `$faker` object, the generator looks for a method with the same name in all the providers attached to it. For instance, calling `$faker->name` triggers a call to `Faker\Provider\Person::name()`. And since Faker starts with the last provider, you can easily override existing formatters: just add a provider containing methods named after the formatters you want to override.
 
@@ -579,7 +618,7 @@ $book->setPrice($faker->randomNumber(2));
 
 **Tip**: A provider can also be a Plain Old PHP Object. In that case, all the public methods of the provider become available to the generator.
 
-## Real Life Usage
+### Real Life Usage
 
 The following script generates a valid XML document:
 
@@ -776,9 +815,9 @@ Fugiat non in itaque sunt nobis totam. Sed nesciunt est deleniti cumque alias. R
 </contacts>
 ```
 
-## Language specific formatters
+### Language specific formatters
 
-### `Faker\Provider\ar_SA\Person`
+#### `Faker\Provider\ar_SA\Person`
 
 ```php
 <?php
@@ -789,7 +828,7 @@ echo $faker->foreignerIdNumber // Foreigner ID number
 echo $faker->companyIdNumber // Company ID number
 ```
 
-### `Faker\Provider\ar_SA\Payment`
+#### `Faker\Provider\ar_SA\Payment`
 
 ```php
 <?php
@@ -797,7 +836,7 @@ echo $faker->companyIdNumber // Company ID number
 echo $faker->bankAccountNumber // "SA0218IBYZVZJSEC8536V4XC"
 ```
 
-### `Faker\Provider\at_AT\Payment`
+#### `Faker\Provider\at_AT\Payment`
 
 ```php
 <?php
@@ -806,7 +845,7 @@ echo $faker->vat;           // "AT U12345678" - Austrian Value Added Tax number
 echo $faker->vat(false);    // "ATU12345678" - unspaced Austrian Value Added Tax number
 ```
 
-### `Faker\Provider\bg_BG\Payment`
+#### `Faker\Provider\bg_BG\Payment`
 
 ```php
 <?php
@@ -815,7 +854,7 @@ echo $faker->vat;           // "BG 0123456789" - Bulgarian Value Added Tax numbe
 echo $faker->vat(false);    // "BG0123456789" - unspaced Bulgarian Value Added Tax number
 ```
 
-### `Faker\Provider\cs_CZ\Address`
+#### `Faker\Provider\cs_CZ\Address`
 
 ```php
 <?php
@@ -823,7 +862,7 @@ echo $faker->vat(false);    // "BG0123456789" - unspaced Bulgarian Value Added T
 echo $faker->region; // "Liberecký kraj"
 ```
 
-### `Faker\Provider\cs_CZ\Company`
+#### `Faker\Provider\cs_CZ\Company`
 
 ```php
 <?php
@@ -832,7 +871,7 @@ echo $faker->region; // "Liberecký kraj"
 echo $faker->ico; // "69663963"
 ```
 
-### `Faker\Provider\cs_CZ\DateTime`
+#### `Faker\Provider\cs_CZ\DateTime`
 
 ```php
 <?php
@@ -841,7 +880,7 @@ echo $faker->monthNameGenitive; // "prosince"
 echo $faker->formattedDate; // "12. listopadu 2015"
 ```
 
-### `Faker\Provider\cs_CZ\Person`
+#### `Faker\Provider\cs_CZ\Person`
 
 ```php
 <?php
@@ -849,7 +888,7 @@ echo $faker->formattedDate; // "12. listopadu 2015"
 echo $faker->birthNumber; // "7304243452"
 ```
 
-### `Faker\Provider\da_DK\Person`
+#### `Faker\Provider\da_DK\Person`
 
 ```php
 <?php
@@ -858,7 +897,7 @@ echo $faker->birthNumber; // "7304243452"
 echo $faker->cpr; // "051280-2387"
 ```
 
-### `Faker\Provider\da_DK\Address`
+#### `Faker\Provider\da_DK\Address`
 
 ```php
 <?php
@@ -870,7 +909,7 @@ echo $faker->kommune; // "Frederiksberg"
 echo $faker->region; // "Region Sjælland"
 ```
 
-### `Faker\Provider\da_DK\Company`
+#### `Faker\Provider\da_DK\Company`
 
 ```php
 <?php
@@ -882,7 +921,8 @@ echo $faker->cvr; // "32458723"
 echo $faker->p; // "5398237590"
 ```
 
-### `Faker\Provider\de_CH\Person`
+#### `Faker\Provider\de_CH\Person`
+
 ```php
 <?php
 
@@ -891,7 +931,7 @@ echo $faker->avs13; // "756.1234.5678.97" OR
 echo $faker->ahv13; // "756.1234.5678.97"
 ```
 
-### `Faker\Provider\de_DE\Payment`
+#### `Faker\Provider\de_DE\Payment`
 
 ```php
 <?php
@@ -901,7 +941,7 @@ echo $faker->bank; // "Volksbank Stuttgart"
 
 ```
 
-### `Faker\Provider\en_HK\Address`
+#### `Faker\Provider\en_HK\Address`
 
 ```php
 <?php
@@ -917,7 +957,7 @@ echo $faker->estate; // "Ching Lai Court"
 
 ```
 
-### `Faker\Provider\en_HK\Phone`
+#### `Faker\Provider\en_HK\Phone`
 
 ```php
 <?php
@@ -933,7 +973,7 @@ echo $faker->faxNumber; // "71937729"
 
 ```
 
-### `Faker\Provider\en_NG\Address`
+#### `Faker\Provider\en_NG\Address`
 
 ```php
 <?php
@@ -942,7 +982,7 @@ echo $faker->faxNumber; // "71937729"
 echo $faker->region; // 'Katsina'
 ```
 
-### `Faker\Provider\en_NG\Person`
+#### `Faker\Provider\en_NG\Person`
 
 ```php
 <?php
@@ -951,7 +991,7 @@ echo $faker->region; // 'Katsina'
 echo $faker->name; // 'Oluwunmi Mayowa'
 ```
 
-### `Faker\Provider\en_NZ\Phone`
+#### `Faker\Provider\en_NZ\Phone`
 
 ```php
 <?php
@@ -966,7 +1006,7 @@ echo $faker->tollFreeNumber; // "0800 123 456"
 echo $faker->areaCode; // "03"
 ```
 
-### `Faker\Provider\en_US\Company`
+#### `Faker\Provider\en_US\Company`
 
 ```php
 <?php
@@ -975,7 +1015,7 @@ echo $faker->areaCode; // "03"
 echo $faker->ein; // '12-3456789'
 ```
 
-### `Faker\Provider\en_US\Payment`
+#### `Faker\Provider\en_US\Payment`
 
 ```php
 <?php
@@ -984,7 +1024,7 @@ echo $faker->bankAccountNumber;  // '51915734310'
 echo $faker->bankRoutingNumber;  // '212240302'
 ```
 
-### `Faker\Provider\en_US\Person`
+#### `Faker\Provider\en_US\Person`
 
 ```php
 <?php
@@ -993,7 +1033,7 @@ echo $faker->bankRoutingNumber;  // '212240302'
 echo $faker->ssn; // '123-45-6789'
 ```
 
-### `Faker\Provider\en_ZA\Company`
+#### `Faker\Provider\en_ZA\Company`
 
 ```php
 <?php
@@ -1002,7 +1042,7 @@ echo $faker->ssn; // '123-45-6789'
 echo $faker->companyNumber; // 1999/789634/01
 ```
 
-### `Faker\Provider\en_ZA\Person`
+#### `Faker\Provider\en_ZA\Person`
 
 ```php
 <?php
@@ -1014,7 +1054,7 @@ echo $faker->idNumber; // 6606192211041
 echo $faker->licenceCode; // EB
 ```
 
-### `Faker\Provider\en_ZA\PhoneNumber`
+#### `Faker\Provider\en_ZA\PhoneNumber`
 
 ```php
 <?php
@@ -1026,7 +1066,7 @@ echo $faker->tollFreeNumber; // 0800 555 5555
 echo $faker->mobileNumber; // 082 123 5555
 ```
 
-### `Faker\Provider\es_ES\Person`
+#### `Faker\Provider\es_ES\Person`
 
 ```php
 <?php
@@ -1038,7 +1078,7 @@ echo $faker->dni; // '77446565E'
 echo $faker->licenceCode; // B
 ```
 
-### `Faker\Provider\es_ES\Payment`
+#### `Faker\Provider\es_ES\Payment`
 
 ```php
 <?php
@@ -1046,7 +1086,7 @@ echo $faker->licenceCode; // B
 echo $faker->vat;           // "A35864370"
 ```
 
-### `Faker\Provider\es_ES\PhoneNumber`
+#### `Faker\Provider\es_ES\PhoneNumber`
 
 ```php
 <?php
@@ -1058,7 +1098,7 @@ echo $faker->tollFreeNumber; // 900 123 456
 echo $faker->mobileNumber; // +34 612 12 24
 ```
 
-### `Faker\Provider\es_PE\Person`
+#### `Faker\Provider\es_PE\Person`
 
 ```php
 <?php
@@ -1067,7 +1107,7 @@ echo $faker->mobileNumber; // +34 612 12 24
 echo $faker->dni; // '83367512'
 ```
 
-### `Faker\Provider\fa_IR\Person`
+#### `Faker\Provider\fa_IR\Person`
 
 ```php
 <?php
@@ -1076,7 +1116,7 @@ echo $faker->dni; // '83367512'
 echo $faker->nationalCode; // "0078475759"
 ```
 
-### `Faker\Provider\fa_IR\Address`
+#### `Faker\Provider\fa_IR\Address`
 
 ```php
 <?php
@@ -1088,7 +1128,7 @@ echo $faker->building; // "ساختمان آفتاب"
 echo $faker->city // "استان زنجان"
 ```
 
-### `Faker\Provider\fa_IR\Company`
+#### `Faker\Provider\fa_IR\Company`
 
 ```php
 <?php
@@ -1097,7 +1137,7 @@ echo $faker->city // "استان زنجان"
 echo $faker->contract; // "رسمی"
 ```
 
-### `Faker\Provider\fi_FI\Payment`
+#### `Faker\Provider\fi_FI\Payment`
 
 ```php
 <?php
@@ -1106,7 +1146,7 @@ echo $faker->contract; // "رسمی"
 echo $faker->bankAccountNumber; // "FI8350799879879616"
 ```
 
-### `Faker\Provider\fi_FI\Person`
+#### `Faker\Provider\fi_FI\Person`
 
 ```php
 <?php
@@ -1118,7 +1158,7 @@ echo $faker->personalIdentityNumber() // '170974-007J'
 echo $faker->personalIdentityNumber(\DateTime::createFromFormat('Y-m-d', '2015-12-14'), 'female') // '141215A520B'
 ```
 
-### `Faker\Provider\fr_BE\Payment`
+#### `Faker\Provider\fr_BE\Payment`
 
 ```php
 <?php
@@ -1127,7 +1167,7 @@ echo $faker->vat;           // "BE 0123456789" - Belgian Value Added Tax number
 echo $faker->vat(false);    // "BE0123456789" - unspaced Belgian Value Added Tax number
 ```
 
-### `Faker\Provider\es_VE\Person`
+#### `Faker\Provider\es_VE\Person`
 
 ```php
 <?php
@@ -1136,7 +1176,7 @@ echo $faker->vat(false);    // "BE0123456789" - unspaced Belgian Value Added Tax
 echo $faker->nationalId; // 'V11223344'
 ```
 
-### `Faker\Provider\es_VE\Company`
+#### `Faker\Provider\es_VE\Company`
 
 ```php
 <?php
@@ -1145,7 +1185,8 @@ echo $faker->nationalId; // 'V11223344'
 echo $faker->taxpayerIdentificationNumber; // 'J1234567891'
 ```
 
-### `Faker\Provider\fr_CH\Person`
+#### `Faker\Provider\fr_CH\Person`
+
 ```php
 <?php
 
@@ -1153,7 +1194,7 @@ echo $faker->taxpayerIdentificationNumber; // 'J1234567891'
 echo $faker->avs13; // "756.1234.5678.97"
 ```
 
-### `Faker\Provider\fr_FR\Address`
+#### `Faker\Provider\fr_FR\Address`
 
 ```php
 <?php
@@ -1174,7 +1215,7 @@ echo $faker->region; // "Saint-Pierre-et-Miquelon"
 echo $faker->secondaryAddress; // "Bat. 961"
 ```
 
-### `Faker\Provider\fr_FR\Company`
+#### `Faker\Provider\fr_FR\Company`
 
 ```php
 <?php
@@ -1186,7 +1227,7 @@ echo $faker->siren; // 082 250 104
 echo $faker->siret; // 347 355 708 00224
 ```
 
-### `Faker\Provider\fr_FR\Payment`
+#### `Faker\Provider\fr_FR\Payment`
 
 ```php
 <?php
@@ -1195,7 +1236,7 @@ echo $faker->siret; // 347 355 708 00224
 echo $faker->vat; // FR 12 123 456 789
 ```
 
-### `Faker\Provider\fr_FR\Person`
+#### `Faker\Provider\fr_FR\Person`
 
 ```php
 <?php
@@ -1204,7 +1245,7 @@ echo $faker->vat; // FR 12 123 456 789
 echo $faker->nir; // 1 88 07 35 127 571 - 19
 ```
 
-### `Faker\Provider\fr_FR\PhoneNumber`
+#### `Faker\Provider\fr_FR\PhoneNumber`
 
 ```php
 <?php
@@ -1215,8 +1256,7 @@ echo $faker->mobileNumber; // +33 6 21 12 72 84
 echo $faker->serviceNumber // 08 98 04 84 46
 ```
 
-
-### `Faker\Provider\he_IL\Payment`
+#### `Faker\Provider\he_IL\Payment`
 
 ```php
 <?php
@@ -1224,7 +1264,7 @@ echo $faker->serviceNumber // 08 98 04 84 46
 echo $faker->bankAccountNumber // "IL392237392219429527697"
 ```
 
-### `Faker\Provider\hr_HR\Payment`
+#### `Faker\Provider\hr_HR\Payment`
 
 ```php
 <?php
@@ -1232,7 +1272,7 @@ echo $faker->bankAccountNumber // "IL392237392219429527697"
 echo $faker->bankAccountNumber // "HR3789114847226078672"
 ```
 
-### `Faker\Provider\hu_HU\Payment`
+#### `Faker\Provider\hu_HU\Payment`
 
 ```php
 <?php
@@ -1241,7 +1281,7 @@ echo $faker->bankAccountNumber // "HR3789114847226078672"
 echo $faker->bankAccountNumber; // "HU09904437680048220079300783"
 ```
 
-### `Faker\Provider\id_ID\Person`
+#### `Faker\Provider\id_ID\Person`
 
 ```php
 <?php
@@ -1253,7 +1293,8 @@ echo $faker->bankAccountNumber; // "HU09904437680048220079300783"
 echo $faker->nik(); // "8522246001570940"
 ```
 
-### `Faker\Provider\it_CH\Person`
+#### `Faker\Provider\it_CH\Person`
+
 ```php
 <?php
 
@@ -1261,7 +1302,7 @@ echo $faker->nik(); // "8522246001570940"
 echo $faker->avs13; // "756.1234.5678.97"
 ```
 
-### `Faker\Provider\it_IT\Company`
+#### `Faker\Provider\it_IT\Company`
 
 ```php
 <?php
@@ -1270,7 +1311,7 @@ echo $faker->avs13; // "756.1234.5678.97"
 echo $faker->vatId(); // "IT98746784967"
 ```
 
-### `Faker\Provider\it_IT\Person`
+#### `Faker\Provider\it_IT\Person`
 
 ```php
 <?php
@@ -1279,7 +1320,7 @@ echo $faker->vatId(); // "IT98746784967"
 echo $faker->taxId(); // "DIXDPZ44E08F367A"
 ```
 
-### `Faker\Provider\ja_JP\Person`
+#### `Faker\Provider\ja_JP\Person`
 
 ```php
 <?php
@@ -1300,7 +1341,7 @@ echo $faker->firstKanaNameFemale // "マアヤ"
 echo $faker->lastKanaName; // "ナカジマ"
 ```
 
-### `Faker\Provider\ka_GE\Payment`
+#### `Faker\Provider\ka_GE\Payment`
 
 ```php
 <?php
@@ -1309,7 +1350,7 @@ echo $faker->lastKanaName; // "ナカジマ"
 echo $faker->bankAccountNumber; // "GE33ZV9773853617253389"
 ```
 
-### `Faker\Provider\kk_KZ\Company`
+#### `Faker\Provider\kk_KZ\Company`
 
 ```php
 <?php
@@ -1318,7 +1359,7 @@ echo $faker->bankAccountNumber; // "GE33ZV9773853617253389"
 echo $faker->businessIdentificationNumber; // "150140000019"
 ```
 
-### `Faker\Provider\kk_KZ\Payment`
+#### `Faker\Provider\kk_KZ\Payment`
 
 ```php
 <?php
@@ -1330,7 +1371,7 @@ echo $faker->bank; // "Қазкоммерцбанк"
 echo $faker->bankAccountNumber; // "KZ1076321LO4H6X41I37"
 ```
 
-### `Faker\Provider\kk_KZ\Person`
+#### `Faker\Provider\kk_KZ\Person`
 
 ```php
 <?php
@@ -1342,7 +1383,7 @@ echo $faker->individualIdentificationNumber; // "780322300455"
 echo $faker->individualIdentificationNumber(new \DateTime('1999-03-01')); // "990301300455"
 ```
 
-### `Faker\Provider\ko_KR\Address`
+#### `Faker\Provider\ko_KR\Address`
 
 ```php
 <?php
@@ -1354,7 +1395,7 @@ echo $faker->metropolitanCity; // "서울특별시"
 echo $faker->borough; // "강남구"
 ```
 
-### `Faker\Provider\ko_KR\PhoneNumber`
+#### `Faker\Provider\ko_KR\PhoneNumber`
 
 ```php
 <?php
@@ -1366,7 +1407,7 @@ echo $faker->localAreaPhoneNumber; // "02-1234-4567"
 echo $faker->cellPhoneNumber; // "010-9876-5432"
 ```
 
-### `Faker\Provider\lt_LT\Payment`
+#### `Faker\Provider\lt_LT\Payment`
 
 ```php
 <?php
@@ -1374,7 +1415,7 @@ echo $faker->cellPhoneNumber; // "010-9876-5432"
 echo $faker->bankAccountNumber // "LT300848876740317118"
 ```
 
-### `Faker\Provider\lv_LV\Person`
+#### `Faker\Provider\lv_LV\Person`
 
 ```php
 <?php
@@ -1383,7 +1424,7 @@ echo $faker->bankAccountNumber // "LT300848876740317118"
 echo $faker->personalIdentityNumber; // "140190-12301"
 ```
 
-### `Faker\Provider\ms_MY\Address`
+#### `Faker\Provider\ms_MY\Address`
 
 ```php
 <?php
@@ -1395,7 +1436,7 @@ echo $faker->township; // "Taman Bahagia"
 echo $faker->townState; // "55100 Bukit Bintang, Kuala Lumpur"
 ```
 
-### `Faker\Provider\ms_MY\Miscellaneous`
+#### `Faker\Provider\ms_MY\Miscellaneous`
 
 ```php
 <?php
@@ -1404,7 +1445,7 @@ echo $faker->townState; // "55100 Bukit Bintang, Kuala Lumpur"
 echo $faker->jpjNumberPlate; // "WPL 5169"
 ```
 
-### `Faker\Provider\ms_MY\Payment`
+#### `Faker\Provider\ms_MY\Payment`
 
 ```php
 <?php
@@ -1422,7 +1463,7 @@ echo $faker->insurance; // "AIA Malaysia"
 echo $faker->swiftCode; // "MBBEMYKLXXX"
 ```
 
-### `Faker\Provider\ms_MY\Person`
+#### `Faker\Provider\ms_MY\Person`
 
 ```php
 <?php
@@ -1431,7 +1472,7 @@ echo $faker->swiftCode; // "MBBEMYKLXXX"
 echo $faker->myKadNumber($gender = null|'male'|'female', $hyphen = null|true|false); // "710703471796"
 ```
 
-### `Faker\Provider\ms_MY\PhoneNumber`
+#### `Faker\Provider\ms_MY\PhoneNumber`
 
 ```php
 <?php
@@ -1446,7 +1487,7 @@ echo $faker->fixedLineNumber($countryCodePrefix = null|true|false, $formatting =
 echo $faker->voipNumber($countryCodePrefix = null|true|false, $formatting = null|true|false); // "015-458 7099"
 ```
 
-### `Faker\Provider\ne_NP\Address`
+#### `Faker\Provider\ne_NP\Address`
 
 ```php
 <?php
@@ -1458,7 +1499,7 @@ echo $faker->district;
 echo $faker->cityName;
 ```
 
-### `Faker\Provider\nl_BE\Payment`
+#### `Faker\Provider\nl_BE\Payment`
 
 ```php
 <?php
@@ -1467,7 +1508,7 @@ echo $faker->vat;           // "BE 0123456789" - Belgian Value Added Tax number
 echo $faker->vat(false);    // "BE0123456789" - unspaced Belgian Value Added Tax number
 ```
 
-### `Faker\Provider\nl_BE\Person`
+#### `Faker\Provider\nl_BE\Person`
 
 ```php
 <?php
@@ -1476,7 +1517,7 @@ echo $faker->rrn();         // "83051711784" - Belgian Rijksregisternummer
 echo $faker->rrn('female'); // "50032089858" - Belgian Rijksregisternummer for a female
 ```
 
-### `Faker\Provider\nl_NL\Company`
+#### `Faker\Provider\nl_NL\Company`
 
 ```php
 <?php
@@ -1486,7 +1527,7 @@ echo $faker->vat; // "NL123456789B01" - Dutch Value Added Tax number
 echo $faker->btw; // "NL123456789B01" - Dutch Value Added Tax number (alias)
 ```
 
-### `Faker\Provider\nl_NL\Person`
+#### `Faker\Provider\nl_NL\Person`
 
 ```php
 <?php
@@ -1494,7 +1535,7 @@ echo $faker->btw; // "NL123456789B01" - Dutch Value Added Tax number (alias)
 echo $faker->idNumber; // "111222333" - Dutch Personal identification number (BSN)
 ```
 
-### `Faker\Provider\nb_NO\MobileNumber`
+#### `Faker\Provider\nb_NO\MobileNumber`
 
 ```php
 <?php
@@ -1505,7 +1546,7 @@ echo $faker->mobileNumber; // "999 88 777"
 echo $faker->mobileNumber; // "99988777"
 ```
 
-### `Faker\Provider\nb_NO\Payment`
+#### `Faker\Provider\nb_NO\Payment`
 
 ```php
 <?php
@@ -1514,7 +1555,7 @@ echo $faker->mobileNumber; // "99988777"
 echo $faker->bankAccountNumber; // "NO3246764709816"
 ```
 
-### `Faker\Provider\pl_PL\Person`
+#### `Faker\Provider\pl_PL\Person`
 
 ```php
 <?php
@@ -1527,7 +1568,7 @@ echo $faker->personalIdentityNumber; // "AKX383360"
 echo $faker->taxpayerIdentificationNumber; // '8211575109'
 ```
 
-### `Faker\Provider\pl_PL\Company`
+#### `Faker\Provider\pl_PL\Company`
 
 ```php
 <?php
@@ -1538,7 +1579,7 @@ echo $faker->regon; // "714676680"
 echo $faker->regonLocal; // "15346111382836"
 ```
 
-### `Faker\Provider\pl_PL\Payment`
+#### `Faker\Provider\pl_PL\Payment`
 
 ```php
 <?php
@@ -1549,7 +1590,7 @@ echo $faker->bank; // "Narodowy Bank Polski"
 echo $faker->bankAccountNumber; // "PL14968907563953822118075816"
 ```
 
-### `Faker\Provider\pt_PT\Person`
+#### `Faker\Provider\pt_PT\Person`
 
 ```php
 <?php
@@ -1558,7 +1599,7 @@ echo $faker->bankAccountNumber; // "PL14968907563953822118075816"
 echo $faker->taxpayerIdentificationNumber; // '165249277'
 ```
 
-### `Faker\Provider\pt_BR\Address`
+#### `Faker\Provider\pt_BR\Address`
 
 ```php
 <?php
@@ -1570,7 +1611,7 @@ echo $faker->region; // 'Nordeste'
 echo $faker->regionAbbr; // 'NE'
 ```
 
-### `Faker\Provider\pt_BR\PhoneNumber`
+#### `Faker\Provider\pt_BR\PhoneNumber`
 
 ```php
 <?php
@@ -1593,7 +1634,7 @@ echo $faker->phoneNumber;           // formatted, random landline or cellphone (
 echo $faker->phoneNumberCleared;    // not formatted, random landline or cellphone (obeying the 9th digit rule)
 ```
 
-### `Faker\Provider\pt_BR\Person`
+#### `Faker\Provider\pt_BR\Person`
 
 ```php
 <?php
@@ -1608,7 +1649,7 @@ echo $faker->rg;         // '84.405.736-3'
 echo $faker->rg(false);  // '844057363'
 ```
 
-### `Faker\Provider\pt_BR\Company`
+#### `Faker\Provider\pt_BR\Company`
 
 ```php
 <?php
@@ -1618,7 +1659,7 @@ echo $faker->cnpj;        // '23.663.478/0001-24'
 echo $faker->cnpj(false); // '23663478000124'
 ```
 
-### `Faker\Provider\ro_MD\Payment`
+#### `Faker\Provider\ro_MD\Payment`
 
 ```php
 <?php
@@ -1627,7 +1668,7 @@ echo $faker->cnpj(false); // '23663478000124'
 echo $faker->bankAccountNumber; // "MD83BQW1CKMUW34HBESDP3A8"
 ```
 
-### `Faker\Provider\ro_RO\Payment`
+#### `Faker\Provider\ro_RO\Payment`
 
 ```php
 <?php
@@ -1636,7 +1677,7 @@ echo $faker->bankAccountNumber; // "MD83BQW1CKMUW34HBESDP3A8"
 echo $faker->bankAccountNumber; // "RO55WRJE3OE8X3YQI7J26U1E"
 ```
 
-### `Faker\Provider\ro_RO\Person`
+#### `Faker\Provider\ro_RO\Person`
 
 ```php
 <?php
@@ -1663,7 +1704,7 @@ echo $faker->cnp($gender = null, $dateOfBirth = null, $county = null, $isResiden
 
 ```
 
-### `Faker\Provider\ro_RO\PhoneNumber`
+#### `Faker\Provider\ro_RO\PhoneNumber`
 
 ```php
 <?php
@@ -1674,7 +1715,7 @@ echo $faker->tollFreePhoneNumber; // "0800123456"
 echo $faker->premiumRatePhoneNumber; // "0900123456"
 ```
 
-### `Faker\Provider\ru_RU\Payment`
+#### `Faker\Provider\ru_RU\Payment`
 
 ```php
 <?php
@@ -1689,7 +1730,7 @@ echo $faker->inn; //  7813540735
 echo $faker->kpp; // 781301001
 ```
 
-### `Faker\Provider\sv_SE\Payment`
+#### `Faker\Provider\sv_SE\Payment`
 
 ```php
 <?php
@@ -1698,7 +1739,7 @@ echo $faker->kpp; // 781301001
 echo $faker->bankAccountNumber; // "SE5018548608468284909192"
 ```
 
-### `Faker\Provider\sv_SE\Person`
+#### `Faker\Provider\sv_SE\Person`
 
 ```php
 <?php
@@ -1709,7 +1750,8 @@ echo $faker->personalIdentityNumber() // '950910-0799'
 //Since the numbers are different for male and female persons, optionally you can specify gender.
 echo $faker->personalIdentityNumber('female') // '950910-0781'
 ```
-### `Faker\Provider\tr_TR\Person`
+
+#### `Faker\Provider\tr_TR\Person`
 
 ```php
 <?php
@@ -1719,8 +1761,7 @@ echo $faker->tcNo // '55300634882'
 
 ```
 
-
-### `Faker\Provider\zh_CN\Payment`
+#### `Faker\Provider\zh_CN\Payment`
 
 ```php
 <?php
@@ -1729,7 +1770,7 @@ echo $faker->tcNo // '55300634882'
 echo $faker->bank; // '中国建设银行'
 ```
 
-### `Faker\Provider\uk_UA\Payment`
+#### `Faker\Provider\uk_UA\Payment`
 
 ```php
 <?php
@@ -1738,7 +1779,7 @@ echo $faker->bank; // '中国建设银行'
 echo $faker->bank; // "Ощадбанк"
 ```
 
-### `Faker\Provider\zh_TW\Person`
+#### `Faker\Provider\zh_TW\Person`
 
 ```php
 <?php
@@ -1747,7 +1788,7 @@ echo $faker->bank; // "Ощадбанк"
 echo $faker->personalIdentityNumber; // A223456789
 ```
 
-### `Faker\Provider\zh_TW\Company`
+#### `Faker\Provider\zh_TW\Company`
 
 ```php
 <?php
@@ -1756,8 +1797,7 @@ echo $faker->personalIdentityNumber; // A223456789
 echo $faker->VAT; //23456789
 ```
 
-
-## Third-Party Libraries Extending/Based On Faker
+### Third-Party Libraries Extending/Based On Faker
 
 * Symfony bundles:
   * [`willdurand/faker-bundle`](https://github.com/willdurand/BazingaFakerBundle): Put the awesome Faker library into the Symfony2 DIC and populate your database with fake data.
@@ -1790,6 +1830,6 @@ echo $faker->VAT; //23456789
 * [`elgentos/masquerade`](https://github.com/elgentos/masquerade): Configuration-based, platform-agnostic, locale-compatible data faker tool (out-of-the-box support for Magento 2)
 * [`ottaviano/faker-gravatar`](https://github.com/ottaviano/faker-gravatar): Generate avatars using [Gravatar](https://en.gravatar.com/site/implement/images/)
 
-## License
+### License
 
 Faker is released under the MIT License. See the bundled LICENSE file for details.

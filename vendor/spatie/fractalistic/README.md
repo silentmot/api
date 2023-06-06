@@ -1,11 +1,6 @@
 # A developer friendly wrapper around Fractal
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/fractalistic.svg?style=flat-square)](https://packagist.org/packages/spatie/fractalistic)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://travis-ci.org/spatie/fractalistic.svg?branch=master)](https://travis-ci.org/spatie/fractalistic)
-[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/fractalistic.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/fractalistic)
-[![StyleCI](https://styleci.io/repos/76027929/shield?branch=master)](https://styleci.io/repos/76027929)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/fractalistic.svg?style=flat-square)](https://packagist.org/packages/spatie/fractalistic)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/fractalistic.svg?style=flat-square)](https://packagist.org/packages/spatie/fractalistic) [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](../data-transfer-object/LICENSE.md) [![Build Status](https://travis-ci.org/spatie/fractalistic.svg?branch=master)](https://travis-ci.org/spatie/fractalistic) [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/fractalistic.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/fractalistic) [![StyleCI](https://styleci.io/repos/76027929/shield?branch=master)](https://styleci.io/repos/76027929) [![Total Downloads](https://img.shields.io/packagist/dt/spatie/fractalistic.svg?style=flat-square)](https://packagist.org/packages/spatie/fractalistic)
 
 [Fractal](http://fractal.thephpleague.com/) is an amazing package to transform data before using it in an API. Unfortunately working with Fractal can be a bit verbose.
 
@@ -47,15 +42,13 @@ Fractal::create($books, new BookTransformer())->toArray();
 
 If you want to use this package inside Laravel, it's recommend to use [laravel-fractal](https://github.com/spatie/laravel-fractal) instead. That package contains a few more whistles and bells specifically targetted at Laravel users.
 
-
-Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all 
-our open source projects [on our website](https://spatie.be/opensource).
+Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
 ## Install
 
 You can pull in the package via composer:
 
-``` bash
+```bash
 composer require spatie/fractalistic
 ```
 
@@ -76,9 +69,10 @@ Spatie\Fractalistic\Fractal::create()
    ->collection($books)
    ->transformWith(function($book) { return ['id' => $book['id']];})
    ->toArray();
-``` 
+```
 
 This will return:
+
 ```php
 ['data' => [['id' => 1], ['id' => 2]]
 ```
@@ -103,19 +97,20 @@ Fractal::create()
    ->toArray();
 ```
 
-To make your code a bit shorter you could also pass the transform closure, class, or classname as a 
-second parameter of the `collection`-method:
+To make your code a bit shorter you could also pass the transform closure, class, or classname as a second parameter of the `collection`-method:
 
 ```php
 Fractal::create()->collection($books, new BookTransformer())->toArray();
 ```
 
 Want to get some sweet json output instead of an array? No problem!
+
 ```php
 Fractal::create()->collection($books, new BookTransformer())->toJson();
 ```
 
 A single item can also be transformed:
+
 ```php
 Fractal::create()->item($books[0], new BookTransformer())->toArray();
 ```
@@ -128,12 +123,9 @@ Let's take a look again at the output of the first example:
 ['data' => [['id' => 1], ['id' => 2]];
 ```
 
-Notice that `data`-key? That's part of Fractal's default behaviour. Take a look at
-[Fractals's documentation on serializers](http://fractal.thephpleague.com/serializers/) to find out why that happens.
+Notice that `data`-key? That's part of Fractal's default behaviour. Take a look at [Fractals's documentation on serializers](http://fractal.thephpleague.com/serializers/) to find out why that happens.
 
-If you want to use another serializer you can specify one with the `serializeWith`-method.
-The `Spatie\Fractalistic\ArraySerializer` comes out of the box. It removes the `data` namespace for
-both collections and items.
+If you want to use another serializer you can specify one with the `serializeWith`-method. The `Spatie\Fractalistic\ArraySerializer` comes out of the box. It removes the `data` namespace for both collections and items.
 
 ```php
 Fractal::create()
@@ -155,16 +147,13 @@ Fractal::create()
    ->toArray();
 ```
 
-
 ### Changing the default serializer
 
-You can change the default serializer by providing the classname or an instantiation of your favorite serializer in
-the config file.
+You can change the default serializer by providing the classname or an instantiation of your favorite serializer in the config file.
 
 ## Using includes
 
-Fractal provides support for [optionally including data](http://fractal.thephpleague.com/transformers/) on the relationships for
-the data you're exporting. You can use Fractal's `parseIncludes` which accepts a string or an array:
+Fractal provides support for [optionally including data](http://fractal.thephpleague.com/transformers/) on the relationships for the data you're exporting. You can use Fractal's `parseIncludes` which accepts a string or an array:
 
 ```php
 Fractal::create()
@@ -173,8 +162,7 @@ Fractal::create()
    ->toArray();
 ```
 
-To improve readablity you can also use a function named `include` followed by the name
-of the include you want to... include:
+To improve readablity you can also use a function named `include` followed by the name of the include you want to... include:
 
 ```php
 Fractal::create()
@@ -186,8 +174,7 @@ Fractal::create()
 
 ## Using excludes
 
-Similar to includes Fractal also provides support for [optionally excluding data](http://fractal.thephpleague.com/transformers/) on the relationships for
-the data you're exporting. You can use Fractal's `parseExcludes` which accepts a string or an array:
+Similar to includes Fractal also provides support for [optionally excluding data](http://fractal.thephpleague.com/transformers/) on the relationships for the data you're exporting. You can use Fractal's `parseExcludes` which accepts a string or an array:
 
 ```php
 Fractal::create()
@@ -196,8 +183,7 @@ Fractal::create()
    ->toArray();
 ```
 
-To improve readability you can also use a function named `exclude` followed by the name
-of the include you want to... exclude:
+To improve readability you can also use a function named `exclude` followed by the name of the include you want to... exclude:
 
 ```php
 Fractal::create()
@@ -209,8 +195,7 @@ Fractal::create()
 
 ## Including meta data
 
-Fractal has support for including meta data. You can use `addMeta` which accepts 
-one or more arrays:
+Fractal has support for including meta data. You can use `addMeta` which accepts one or more arrays:
 
 ```php
 Fractal::create()
@@ -236,9 +221,7 @@ This will return the following array:
 
 ## Using pagination
 
-Fractal provides a Laravel-specific paginator, `IlluminatePaginatorAdapter`, which accepts an instance of Laravel's `LengthAwarePaginator`
-and works with paginated Eloquent results. When using some serializers, such as the `JsonApiSerializer`, pagination data can be
-automatically generated and included in the result set:
+Fractal provides a Laravel-specific paginator, `IlluminatePaginatorAdapter`, which accepts an instance of Laravel's `LengthAwarePaginator` and works with paginated Eloquent results. When using some serializers, such as the `JsonApiSerializer`, pagination data can be automatically generated and included in the result set:
 
 ```php
 $paginator = Book::paginate(5);
@@ -291,14 +274,14 @@ Fractal::create()
 
 ## Limit recursion
 
- To increase or decrease the level of embedded includes you can use `limitRecursion`. 
- 
- ```php
- Fractal::create()
-     ->collection($this->testBooks, new TestTransformer())
-     ->includesDataThatHasALotOfRecursion
-     ->limitRecursion(5);
- ```
+To increase or decrease the level of embedded includes you can use `limitRecursion`.
+
+```php
+Fractal::create()
+    ->collection($this->testBooks, new TestTransformer())
+    ->includesDataThatHasALotOfRecursion
+    ->limitRecursion(5);
+```
 
 If you do not call `limitRecursion` a default value of 10 is used.
 
@@ -326,7 +309,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 
 ## Testing
 
-``` bash
+```bash
 $ composer test
 ```
 
@@ -348,16 +331,15 @@ We publish all received postcards [on our company website](https://spatie.be/en/
 
 ## Credits
 
-- [Freek Van der Herten](https://twitter.com/freekmurze)
-- [All contributors](../../contributors)
+* [Freek Van der Herten](https://twitter.com/freekmurze)
+* [All contributors](../../contributors/)
 
 ## Support us
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
-Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie). 
-All pledges will be dedicated to allocating workforce on maintenance and new awesome stuff.
+Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie). All pledges will be dedicated to allocating workforce on maintenance and new awesome stuff.
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](../data-transfer-object/LICENSE.md) for more information.

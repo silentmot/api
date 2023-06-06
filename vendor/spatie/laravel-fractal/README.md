@@ -1,15 +1,8 @@
 # An easy to use Fractal wrapper built for Laravel and Lumen applications
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-fractal.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-fractal)
-[![Code coverage](https://scrutinizer-ci.com/g/spatie/laravel-fractal/badges/coverage.png)](https://scrutinizer-ci.com/g/spatie/laravel-fractal)
-[![Build Status](https://travis-ci.org/spatie/laravel-fractal.svg?branch=master)](https://travis-ci.org/spatie/laravel-fractal)
-[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/laravel-fractal.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/laravel-fractal)
-[![StyleCI](https://styleci.io/repos/43743138/shield?branch=master)](https://styleci.io/repos/43743138)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-fractal.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-fractal)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-fractal.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-fractal) [![Code coverage](https://scrutinizer-ci.com/g/spatie/laravel-fractal/badges/coverage.png)](https://scrutinizer-ci.com/g/spatie/laravel-fractal) [![Build Status](https://travis-ci.org/spatie/laravel-fractal.svg?branch=master)](https://travis-ci.org/spatie/laravel-fractal) [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/laravel-fractal.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/laravel-fractal) [![StyleCI](https://styleci.io/repos/43743138/shield?branch=master)](https://styleci.io/repos/43743138) [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-fractal.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-fractal)
 
-The package provides a nice and easy wrapper around [Fractal](http://fractal.thephpleague.com/)
-for use in your Laravel applications. If you don't know what Fractal does, [take a peek at their intro](http://fractal.thephpleague.com/).
-Shortly said, Fractal is very useful to transform data before using it in an API.
+The package provides a nice and easy wrapper around [Fractal](http://fractal.thephpleague.com/) for use in your Laravel applications. If you don't know what Fractal does, [take a peek at their intro](http://fractal.thephpleague.com/). Shortly said, Fractal is very useful to transform data before using it in an API.
 
 Using Fractal data can be transformed like this:
 
@@ -42,6 +35,7 @@ fractal()
 ```
 
 Lovers of facades will be glad to know that a facade is provided:
+
 ```php
 Fractal::collection($books)->transformWith(new BookTransformer())->toArray();
 ```
@@ -64,13 +58,12 @@ Transforming right from a Laravel collection is particularly useful for Eloquent
 Users::all()->transformWith(new UserTransformer())->toArray();
 ```
 
-Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all
-our open source projects [on our website](https://spatie.be/opensource).
+Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
 ## Installation in Laravel 5.4
 
-
 You can pull in the package via composer:
+
 ```bash
 composer require spatie/laravel-fractal:^4.0
 ```
@@ -80,16 +73,14 @@ And then follow [the installation instructions of the v4 branch of this package]
 ## Installation in Laravel 5.5 and up
 
 You can pull in the package via composer:
-``` bash
+
+```bash
 composer require spatie/laravel-fractal
 ```
 
 The package will automatically register itself.
 
-If you want to [change the default serializer](https://github.com/spatie/fractalistic#changing-the-default-serializer),
-the [default paginator](https://github.com/spatie/fractalistic#using-pagination),
-or the default fractal class `Spatie\Fractal\Fractal`
-you must publish the config file:
+If you want to [change the default serializer](https://github.com/spatie/fractalistic#changing-the-default-serializer), the [default paginator](https://github.com/spatie/fractalistic#using-pagination), or the default fractal class `Spatie\Fractal\Fractal` you must publish the config file:
 
 ```bash
 php artisan vendor:publish --provider="Spatie\Fractal\FractalServiceProvider"
@@ -219,11 +210,12 @@ Rename your config file from `laravel-fractal` to `fractal`
 ### From v2 to v3
 
 `v3` was introduced to swap out the `league/fractal` with `spatie/fractalistic`. Support for Lumen was dropped. You should be able to upgrade a Laravel application from `v2` to `v3` without any code changes.
+
 ### From v1 to v2
 
 In most cases you can just upgrade to `v2` with making none or only minor changes to your code:
 
-- `resourceName` has been renamed to `withResourceName`.
+* `resourceName` has been renamed to `withResourceName`.
 
 The main reason why `v2` of this package was tagged is because v0.14 of the underlying [Fractal](http://fractal.thephpleague.com/) by the League contains breaking change. If you use the `League\Fractal\Serializer\JsonApiSerializer` in v2 the `links` key will contain `self`, `first`, `next` and `last`.
 
@@ -233,7 +225,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 
 ## Testing
 
-``` bash
+```bash
 $ composer test
 ```
 
@@ -255,16 +247,15 @@ We publish all received postcards [on our company website](https://spatie.be/en/
 
 ## Credits
 
-- [Freek Van der Herten](https://twitter.com/freekmurze)
-- [All contributors](../../contributors)
+* [Freek Van der Herten](https://twitter.com/freekmurze)
+* [All contributors](../../contributors/)
 
 ## Support us
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
-Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie).
-All pledges will be dedicated to allocating workforce on maintenance and new awesome stuff.
+Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie). All pledges will be dedicated to allocating workforce on maintenance and new awesome stuff.
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](../fractalistic/LICENSE.md) for more information.
